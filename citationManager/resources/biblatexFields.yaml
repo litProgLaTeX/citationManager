@@ -1,0 +1,2955 @@
+abstract:
+  comment: |
+    This field is intended for recording abstracts in a bib file, to be 
+    printed by a special bibliography style. It is not used by all standard 
+    bibliography styles.
+  aigaion:
+  - abstract
+  amsrefs: []
+  biblatex:
+  - abstract
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+addendum:
+  comment: |
+    Miscellaneous bibliographic data to be printed at the end of the entry. 
+    This is similar to the note field except that it is printed at the end 
+    of the bibliography entry.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - addendum
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - misc
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - online
+  - patent
+  - periodical
+  - proceedings
+  - report
+  - software
+  - thesis
+  - unpublished
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+address:
+  comment: |
+    An alias for location, provided for BibTeX compatibility. Traditional 
+    BibTeX uses the slightly misleading field name address for the place of 
+    publication, i. e., the location of the publisher, while Biblatex uses 
+    the generic field name location. See §§ 2.2.2 and 2.3.4.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - address
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: list
+  type: literal
+  usefulFor: []
+
+afterword:
+  comment: |
+    The author(s) of an afterword to the work. If the author of the 
+    afterword is identical to the editor and/or translator, the standard 
+    styles will automatically con- catenate these fields in the 
+    bibliography. See also introduction and foreword.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - afterword
+  bibtex: []
+  optionalFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - mvbook
+  - mvcollection
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+annotation:
+  comment: |
+    This field may be useful when implementing a style for annotated 
+    bibliographies. it is not used by all standard bibliography styles. 
+    Note that this field is completely unrelated to annotator. The 
+    annotator is the author of annotations which are part of the work 
+    cited.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - annotation
+  bibtex:
+  - annote
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+annotator:
+  comment: |
+    The author(s) of annotations to the work. If the annotator is identical 
+    to the editor and/or translator, the standard styles will automatically 
+    concatenate these fields in the bibliography. See also commentator.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - annotator
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - collection
+  - inbook
+  - incollection
+  - mvbook
+  - mvcollection
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+annote:
+  comment: |
+    An alias for annotation, provided for jurabib compatibility. See § 
+    2.2.2.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - annote
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+archiveprefix:
+  comment: |
+    An alias for eprinttype, provided for arXiv compatibility. See §§ 2.2.2 
+    and 3.11.7.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - archiveprefix
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+author:
+  comment: The author(s) of the title.
+  aigaion:
+  - author
+  amsrefs:
+  - author
+  biblatex:
+  - author
+  bibtex:
+  - author
+  - author-editor
+  optionalFor: []
+  requiredBy:
+  - article
+  - book
+  - inbook
+  - incollection
+  - inproceedings
+  - mvbook
+  - online
+  - patent
+  - report
+  - software
+  - thesis
+  - unpublished
+  structure: list
+  type: name
+  usefulFor: []
+
+author-editor:
+  comment: Either author or editor but not both.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - author-editor
+  bibtex: []
+  optionalFor: []
+  requiredBy:
+  - booklet
+  - manual
+  - misc
+  structure: field
+  type: choice
+  usefulFor: []
+
+authortype:
+  comment: |
+    The type of author. This field will affect the string (if any) used to 
+    introduce the author. Not used by the standard bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - authortype
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: key
+  usefulFor: []
+
+bookauthor:
+  comment: The author(s) of the booktitle.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - bookauthor
+  bibtex: []
+  optionalFor:
+  - inbook
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+bookpagination:
+  comment: |
+    If the work is published as part of another one, this is the pagination 
+    scheme of the en- closing work, i. e., bookpagination relates to 
+    pagination like booktitle to title. The value of this field will affect 
+    the formatting of the pages and pagetotal fields. The key should be 
+    given in the singular form. Possible keys are page, column, line, 
+    verse, section, and paragraph. See also pagination as well as § 2.3.10.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - bookpagination
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: key
+  usefulFor: []
+
+booksubtitle:
+  comment: |
+    The subtitle related to the booktitle. If the subtitle field refers to 
+    a work which is part of a larger publication, a possible subtitle of 
+    the main work is given in this field. See also subtitle.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - booksubtitle
+  bibtex: []
+  optionalFor:
+  - inbook
+  - incollection
+  - inproceedings
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+booktitle:
+  comment: |
+    If the title field indicates the title of a work which is part of a 
+    larger publication, the title of the main work is given in this field. 
+    See also title.
+  aigaion:
+  - booktitle
+  amsrefs:
+  - booktitle
+  biblatex:
+  - booktitle
+  bibtex:
+  - booktitle
+  optionalFor: []
+  requiredBy:
+  - inbook
+  - incollection
+  - inproceedings
+  structure: field
+  type: literal
+  usefulFor: []
+
+booktitleaddon:
+  comment: An annex to the booktitle, to be printed in a different font.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - booktitleaddon
+  bibtex: []
+  optionalFor:
+  - inbook
+  - incollection
+  - inproceedings
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+chapter:
+  comment: A chapter or section or any other unit of a work.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - chapter
+  bibtex:
+  - chapter
+  - chapter-pages
+  optionalFor:
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - proceedings
+  - report
+  - thesis
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+citekey:
+  comment: |
+    The citation identifier use by the \cite commands to select the 
+    correct reference. This is a local extension to the BibLaTeX 
+    format.
+  aigaion:
+  - citekey
+  amsrefs: []
+  biblatex:
+  - citekey
+  bibtex: []
+  optionalFor: []
+  requiredBy:
+  - article
+  - book
+  - bookinbook
+  - booklet
+  - collection
+  - custom[a–f]
+  - inbook
+  - incollection
+  - inproceedings
+  - inreference
+  - manual
+  - misc
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - mvreference
+  - online
+  - patent
+  - periodical
+  - proceedings
+  - reference
+  - report
+  - set
+  - software
+  - suppbook
+  - suppcollection
+  - suppperiodical
+  - thesis
+  - unpublished
+  - xdata
+  structure: field
+  type: literal
+  usefulFor: []
+
+commentator:
+  comment: |
+    The author(s) of a commentary to the work. Note that this field is 
+    intended for commented editions which have a commentator in addition to 
+    the author. If the work is a stand-alone commentary, the commentator 
+    should be given in the author field. If the commentator is identical to 
+    the editor and/or translator, the standard styles will automatically 
+    concatenate these fields in the bibliography. See also annotator.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - commentator
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - collection
+  - inbook
+  - incollection
+  - mvbook
+  - mvcollection
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+creationid:
+  comment: |
+    The original Aigaion database primary key. It can be used to 
+    identify the order in which the references were added. The order of 
+    addition of new references can now be determined by the git archive 
+    system.
+  aigaion:
+  - pubid
+  amsrefs: []
+  biblatex:
+  - creationid
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: number
+  usefulFor: []
+
+crossref:
+  comment: |
+    This field holds an entry key for the cross-referencing feature. Child 
+    entries with a crossref field inherit data from the parent entry 
+    specified in the crossref field. If the number of child entries 
+    referencing a specific parent entry hits a certain threshold, the 
+    parent entry is automatically added to the bibliography even if it has 
+    not been cited explicitly. The threshold is settable with the 
+    mincrossrefs package option from § 3.1.2.1. Style authors should note 
+    that whether or not the crossref fields of the child entries are 
+    defined on the Biblatex level depends on the availability of the parent 
+    entry. If the parent entry is available, the crossref fields of the 
+    child entries will be defined. If not, the child entries still inherit 
+    the data from the parent entry but their crossref fields will be 
+    undefined. Whether the parent entry is added to the bibliography 
+    implicitly because of the threshold or explicitly because it has been 
+    cited does not matter. See also the xref field in this section as well 
+    as § 2.4.1.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - crossref
+  bibtex:
+  - crossref
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: entry key
+  usefulFor: []
+
+date:
+  comment: The publication date. See also month and year as well as § 2.3.8.
+  aigaion: []
+  amsrefs:
+  - date
+  biblatex:
+  - date
+  bibtex: []
+  optionalFor:
+  - misc
+  - online
+  - patent
+  - periodical
+  - software
+  - unpublished
+  requiredBy: []
+  structure: field
+  type: date
+  usefulFor: []
+
+doi:
+  comment: The Digital Object Identifier of the work.
+  aigaion:
+  - doi
+  amsrefs: []
+  biblatex:
+  - doi
+  bibtex: []
+  optionalFor:
+  - misc
+  - software
+  - thesis
+  requiredBy: []
+  structure: field
+  type: verbatim
+  usefulFor:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - patent
+  - periodical
+  - proceedings
+  - report
+
+edition:
+  comment: |
+    The edition of a printed publication. This must be an integer, not an 
+    ordinal. Don’t say edition={First} or edition={1st} but edition={1}. 
+    The bibliography style converts this to a language dependent ordinal. 
+    It is also possible to give the edition as a literal string, for 
+    example “Third, revised and expanded edition”.
+  aigaion:
+  - edition
+  amsrefs:
+  - edition
+  biblatex:
+  - edition
+  bibtex:
+  - edition
+  optionalFor:
+  - manual
+  requiredBy: []
+  structure: field
+  type: integer or literal
+  usefulFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - proceedings
+
+editor:
+  comment: |
+    The editor(s) of the title, booktitle, or maintitle, depending on the 
+    entry type. Use the editortype field to specify the role if it is 
+    different from ‘editor’. See § 2.3.6 for further hints.
+  aigaion:
+  - editor
+  amsrefs:
+  - editor
+  biblatex:
+  - editor
+  bibtex:
+  - author-editor
+  - editor
+  optionalFor:
+  - article
+  - incollection
+  - inproceedings
+  - mvproceedings
+  - online
+  - proceedings
+  - software
+  requiredBy:
+  - collection
+  - mvcollection
+  - periodical
+  structure: list
+  type: name
+  usefulFor:
+  - book
+  - inbook
+  - mvbook
+
+editora:
+  comment: |
+    A secondary editor performing a different editorial role, such as 
+    compiling, redacting, etc. Use the editoratype field to specify the 
+    role. See § 2.3.6 for further hints.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - editora
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - collection
+  - inbook
+  - incollection
+  - mvbook
+  - mvcollection
+  - periodical
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+editoratype:
+  comment: |
+    Similar to editortype but referring to the editora field. See § 2.3.6 
+    for further hints.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - editoratype
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: key
+  usefulFor: []
+
+editorb:
+  comment: |
+    Another secondary editor performing a different role. Use the 
+    editorbtype field to specify the role. See § 2.3.6 for further hints.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - editorb
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - collection
+  - inbook
+  - incollection
+  - mvbook
+  - mvcollection
+  - periodical
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+editorbtype:
+  comment: |
+    Similar to editortype but referring to the editorb field. See § 2.3.6 
+    for further hints.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - editorbtype
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: key
+  usefulFor: []
+
+editorc:
+  comment: |
+    Another secondary editor performing a different role. Use the 
+    editorctype field to specify the role. See § 2.3.6 for further hints.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - editorc
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - collection
+  - inbook
+  - incollection
+  - mvbook
+  - mvcollection
+  - periodical
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+editorctype:
+  comment: |
+    Similar to editortype but referring to the editorc field. See § 2.3.6 
+    for further hints.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - editorctype
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: key
+  usefulFor: []
+
+editortype:
+  comment: |
+    The type of editorial role performed by the editor. Roles supported by 
+    default are editor, compiler, founder, continuator, redactor, reviser, 
+    collaborator. The role ‘editor’ is the default. In this case, the 
+    field is omissible. See § 2.3.6 for further hints.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - editortype
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: key
+  usefulFor: []
+
+eid:
+  comment: The electronic identifier of an @article.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - eid
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - article
+  - periodical
+
+entryset:
+  comment: |
+    This field is specific to entry sets. See § 3.11.5 for details. This 
+    field is consumed by the backend processing and does not appear in the 
+    .bbl.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - entryset
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: separated values
+  usefulFor: []
+
+entrysubtype:
+  comment: |
+    This field, which is not used by the standard styles, may be used to 
+    specify a subtype of an entry type. This may be useful for bibliography 
+    styles which support a finer- grained set of entry types.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - entrysubtype
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+entrytype:
+  comment: |
+    The entry type. This is a local extension to the BibLaTeX format.
+  aigaion:
+  - entrytype
+  amsrefs: []
+  biblatex:
+  - entrytype
+  bibtex: []
+  optionalFor: []
+  requiredBy:
+  - article
+  - book
+  - bookinbook
+  - booklet
+  - collection
+  - custom[a–f]
+  - inbook
+  - incollection
+  - inproceedings
+  - inreference
+  - manual
+  - misc
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - mvreference
+  - online
+  - patent
+  - periodical
+  - proceedings
+  - reference
+  - report
+  - set
+  - software
+  - suppbook
+  - suppcollection
+  - suppperiodical
+  - thesis
+  - unpublished
+  - xdata
+  structure: field
+  type: literal
+  usefulFor: []
+
+eprint:
+  comment: |
+    The electronic identifier of an online publication. This is roughly 
+    comparable to a doi but specific to a certain archive, repository, 
+    service, or system. See § 3.11.7 for details. Also see eprinttype and 
+    eprintclass.
+  aigaion: []
+  amsrefs:
+  - eprint
+  biblatex:
+  - eprint
+  bibtex: []
+  optionalFor:
+  - misc
+  - software
+  requiredBy: []
+  structure: field
+  type: verbatim
+  usefulFor:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - patent
+  - periodical
+  - proceedings
+  - report
+  - thesis
+  - unpublished
+
+eprintclass:
+  comment: |
+    Additional information related to the resource indicated by the 
+    eprinttype field. This could be a section of an archive, a path 
+    indicating a service, a classification of some sort, etc. See § 3.11.7 
+    for details. Also see eprint and eprinttype.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - eprintclass
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - misc
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - patent
+  - periodical
+  - proceedings
+  - report
+  - software
+  - thesis
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+eprinttype:
+  comment: |
+    The type of eprint identifier, e. g., the name of the archive, 
+    repository, service, or system the eprint field refers to. See § 3.11.7 
+    for details. Also see eprint and eprintclass.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - eprinttype
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - misc
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - patent
+  - periodical
+  - proceedings
+  - report
+  - software
+  - thesis
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+eventdate:
+  comment: |
+    The date of a conference, a symposium, or some other event in 
+    @proceedings and @inproceedings entries. This field may also be useful 
+    for the custom types listed in § 2.1.3. See also eventtitle and venue 
+    as well as § 2.3.8.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - eventdate
+  bibtex: []
+  optionalFor:
+  - inproceedings
+  - mvproceedings
+  - proceedings
+  requiredBy: []
+  structure: field
+  type: date
+  usefulFor: []
+
+eventtitle:
+  comment: |
+    The title of a conference, a symposium, or some other event in 
+    @proceedings and @inproceedings entries. This field may also be useful 
+    for the custom types listed in § 2.1.3. Note that this field holds the 
+    plain title of the event. Things like “Proceed- ings of the Fifth XYZ 
+    Conference” go into the titleaddon or booktitleaddon field, 
+    respectively. See also eventdate and venue.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - eventtitle
+  bibtex: []
+  optionalFor:
+  - inproceedings
+  - mvproceedings
+  - proceedings
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+eventtitleaddon:
+  comment: |
+    An annex to the eventtitle field. Can be used for known event acronyms, 
+    for example.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - eventtitleaddon
+  bibtex: []
+  optionalFor:
+  - inproceedings
+  - mvproceedings
+  - proceedings
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+execute:
+  comment: |
+    A special field which holds arbitrary TeX code to be executed whenever 
+    the data of the respective entry is accessed. This may be useful to 
+    handle special cases. Conceptually, this field is comparable to the 
+    hooks \AtEveryBibitem, \AtEveryLositem, and \AtEveryCitekey from § 
+    4.10.6, except that it is definable on a per-entry basis in the bib 
+    file. Any code in this field is executed automatically immediately 
+    after these hooks.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - execute
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: code
+  usefulFor: []
+
+file:
+  comment: |
+    A local link to a pdf or other version of the work. Not used by the 
+    standard bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - file
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: verbatim
+  usefulFor: []
+
+foreword:
+  comment: |
+    The author(s) of a foreword to the work. If the author of the foreword 
+    is identical to the editor and/or translator, the standard styles will 
+    automatically concatenate these fields in the bibliography. See also 
+    introduction and afterword.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - foreword
+  bibtex: []
+  optionalFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - mvbook
+  - mvcollection
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+gender:
+  comment: |
+    The gender of the author or the gender of the editor, if there is no 
+    author. The following identifiers are supported: sf (feminine singular, 
+    a single female name), sm (masculine singular, a single male name), sn 
+    (neuter singular, a single neuter name), pf (feminine plural, a list of 
+    female names), pm (masculine plural, a list of male names), pn (neuter 
+    plural, a list of neuter names), pp (plural, a mixed gender list of 
+    names). This information is only required by special bibliography and 
+    citation styles and only in certain languages. For example, a citation 
+    style may replace recurrent author names with a term such as ‘idem’. If 
+    the Latin word is used, as is custom in English and French, there is no 
+    need to specify the gender. In German publications, however, such key 
+    terms are usually given in German and in this case they are 
+    gender-sensitive.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - gender
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: Pattern matching one of sf, sm, sn, pf, pm, pn, pp
+  usefulFor: []
+
+holder:
+  comment: |
+    The holder(s) of a @patent, if different from the author. Not that 
+    corporate holders need to be wrapped in an additional set of braces, 
+    see § 2.3.3 for details. This list may also be useful for the custom 
+    types listed in § 2.1.3.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - holder
+  bibtex: []
+  optionalFor:
+  - patent
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+howpublished:
+  comment: |
+    A publication notice for unusual publications which do not fit into any 
+    of the common categories.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - howpublished
+  bibtex:
+  - howpublished
+  optionalFor:
+  - booklet
+  - misc
+  - unpublished
+  requiredBy:
+  - software
+  structure: field
+  type: literal
+  usefulFor: []
+
+ids:
+  comment: |
+    Citation key aliases for the main citation key. An entry may be cited 
+    by any of its aliases and Biblatex will treat the citation as if it had 
+    used the primary citation key. This is to aid users who change their 
+    citation keys but have legacy documents which use older keys for the 
+    same entry. This field is consumed by the backend processing and does 
+    not appear in the .bbl.
+  aigaion:
+  - origbibtexid
+  amsrefs: []
+  biblatex:
+  - ids
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: separated list of entrykeys
+  usefulFor: []
+
+indexsorttitle:
+  comment: |
+    The title used when sorting the index. In contrast to indextitle, this 
+    field is used for sorting only. The printed title in the index is the 
+    indextitle or the title field. This field may be useful if the title 
+    contains special characters or commands which interfere with the 
+    sorting of the index. Consider this example:<pre>
+    
+        title          = {The \LaTeX\ Companion},
+        indextitle     = {\LaTeX\ Companion, The},
+        indexsorttitle = {LATEX Companion},
+    
+    </pre>Style authors should note that Biblatex automatically copies 
+    the value of either the indextitle or the title field to 
+    indexsorttitle if the latter field is undefined.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - indexsorttitle
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+indextitle:
+  comment: |
+    A title to use for indexing instead of the regular title field. This 
+    field may be useful if you have an entry with a title like “An 
+    Introduction to ...” and want that indexed as “Introduction to ..., 
+    An”. Style authors should note that Biblatex automatically copies the 
+    value of the title field to indextitle if the latter field is 
+    undefined.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - indextitle
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+institution:
+  comment: |
+    The name of a university or some other institution, depending on the 
+    entry type. Traditional BibTeX uses the field name school for theses, 
+    which is supported as an alias. See also §§ 2.2.5 and 2.3.4.
+  aigaion:
+  - institution
+  - school
+  amsrefs: []
+  biblatex:
+  - institution
+  bibtex:
+  - institution
+  - school
+  optionalFor: []
+  requiredBy:
+  - report
+  - thesis
+  structure: list
+  type: literal
+  usefulFor: []
+
+introduction:
+  comment: |
+    The author(s) of an introduction to the work. If the author of the 
+    introduction is identical to the editor and/or translator, the standard 
+    styles will automatically concatenate these fields in the bibliography. 
+    See also foreword and afterword.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - introduction
+  bibtex: []
+  optionalFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - mvbook
+  - mvcollection
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+isan:
+  comment: |
+    The International Standard Audiovisual Number of an audiovisual work. 
+    Not used by the standard bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - isan
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+isbn:
+  comment: The International Standard Book Number of a book.
+  aigaion:
+  - isbn
+  amsrefs:
+  - isbn
+  biblatex:
+  - isbn
+  bibtex: []
+  optionalFor:
+  - manual
+  - thesis
+  - unpublished
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - proceedings
+
+ismn:
+  comment: |
+    The International Standard Music Number for printed music such as 
+    musical scores. Not used by the standard bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - ismn
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+isrn:
+  comment: |
+    The International Standard Technical Report Number of a technical 
+    report.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - isrn
+  bibtex: []
+  optionalFor:
+  - report
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+issn:
+  comment: The International Standard Serial Number of a periodical.
+  aigaion:
+  - issn
+  amsrefs:
+  - issn
+  biblatex:
+  - issn
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - article
+  - periodical
+
+issue:
+  comment: |
+    The issue of a journal. This field is intended for journals whose 
+    individual issues are identified by a designation such as ‘Spring’ or 
+    ‘Summer’ rather than the month or a number. Since the placement of 
+    issue is similar to month and number, this field may also be useful 
+    with double issues and other special cases. See also month, number, and 
+    § 2.3.9.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - issue
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - article
+  - periodical
+
+issuesubtitle:
+  comment: The subtitle of a specific issue of a journal or other periodical.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - issuesubtitle
+  bibtex: []
+  optionalFor:
+  - article
+  - periodical
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+issuetitle:
+  comment: The title of a specific issue of a journal or other periodical.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - issuetitle
+  bibtex: []
+  optionalFor:
+  - article
+  - periodical
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+iswc:
+  comment: |
+    The International Standard Work Code of a musical work. Not used by the 
+    standard bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - iswc
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+journal:
+  comment: |
+    An alias for journaltitle, provided for BibTeX compatibility. See § 
+    2.2.2.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - journal
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+journalsubtitle:
+  comment: The subtitle of a journal, a newspaper, or some other periodical.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - journalsubtitle
+  bibtex: []
+  optionalFor:
+  - article
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+journaltitle:
+  comment: The name of a journal, a newspaper, or some other periodical.
+  aigaion:
+  - journal
+  amsrefs:
+  - journal
+  biblatex:
+  - journaltitle
+  bibtex:
+  - journal
+  optionalFor: []
+  requiredBy:
+  - article
+  structure: field
+  type: literal
+  usefulFor: []
+
+key:
+  comment: |
+    An alias for sortkey, provided for BibTeX compatibility. See § 2.2.3.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - key
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+keywords:
+  comment: |
+    A separated list of keywords. These keywords are intended for the 
+    bibliography filters (see §§ 3.6.2 and 3.11.4), they are usually not 
+    printed. Note that with the default separator (comma), spaces around 
+    the separator are ignored.
+  aigaion:
+  - namekey
+  amsrefs: []
+  biblatex:
+  - keywords
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: separated values
+  usefulFor: []
+
+label:
+  comment: |
+    A designation to be used by the citation style as a substitute for the 
+    regular label if any data required to generate the regular label is 
+    missing. For example, when an author-year citation style is generating 
+    a citation for an entry which is missing the author or the year, it may 
+    fall back to label. See § 2.3.2 for details. Note that, in contrast to 
+    shorthand, label is only used as a fallback. See also shorthand.
+  aigaion: []
+  amsrefs:
+  - label
+  biblatex:
+  - label
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+langid:
+  comment: |
+    The language id of the bibliography entry. The alias hyphenation is 
+    provided for backwards compatibility. The identifier must be a language 
+    name known to the babel/polyglossia packages. This information may be 
+    used to switch hyphenation patterns and localize strings in the 
+    bibliography. Note that the language names are case sensitive. The 
+    languages currently supported by this package are given in table 2. 
+    Note that babel treats the identifier english as an alias for british 
+    or american, depending on the babel version. The Biblatex package 
+    always treats it as an alias for american. It is preferable to use the 
+    language identifiers american and british (babel) or a language 
+    specific option to specify a language variant (polyglossia, using the 
+    langidopts field) to avoid any possible confusion. Compare language in 
+    § 2.2.2.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - langid
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: identifier
+  usefulFor: []
+
+langidopts:
+  comment: |
+    For polyglossia users, allows per-entry language specific options. The 
+    literal value of this field is passed to polyglossia’s language 
+    switching facility when using the package option autolang=langname. For 
+    example, the fields:<pre>
+    
+        langid     = {english},
+        langidopts = {variant=british},
+    
+    </pre>would wrap the bibliography entry in:<pre>
+    
+        \english[variant=british]
+            ...
+        \endenglish
+    </pre>
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - langidopts
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+language:
+  comment: |
+    The language(s) of the work. Languages may be specified literally or as 
+    localization keys. If localization keys are used, the prefix lang is 
+    omissible. See also origlanguage and compare langid in § 2.2.3.
+  aigaion: []
+  amsrefs:
+  - hyphenation
+  - language
+  biblatex:
+  - language
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - misc
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - online
+  - periodical
+  - proceedings
+  - report
+  - software
+  - thesis
+  - unpublished
+  requiredBy: []
+  structure: list
+  type: key
+  usefulFor: []
+
+library:
+  comment: |
+    This field may be useful to record information such as a library name 
+    and a call number. This may be printed by a special bibliography style 
+    if desired. Not used by the standard bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - library
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+'list[a–f]':
+  comment: |
+    Custom lists for special bibliography styles. Not used by the standard 
+    bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - list[a–f]
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: list
+  type: literal
+  usefulFor: []
+
+location:
+  comment: |
+    The place(s) of publication, i. e., the location of the publisher or 
+    institution, depending on the entry type. Traditional BibTeX uses the 
+    field name address, which is supported as an alias. See also §§ 2.2.5 
+    and 2.3.4. With @patent entries, this list indicates the scope of a 
+    patent. This list may also be useful for the custom types listed in § 
+    2.1.3.
+  aigaion:
+  - address
+  - location
+  amsrefs:
+  - address
+  biblatex:
+  - location
+  bibtex:
+  - address
+  optionalFor:
+  - misc
+  - patent
+  - software
+  - thesis
+  - unpublished
+  requiredBy: []
+  structure: list
+  type: literal
+  usefulFor:
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - proceedings
+  - report
+
+mainsubtitle:
+  comment: The subtitle related to the maintitle. See also subtitle.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - mainsubtitle
+  bibtex: []
+  optionalFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - proceedings
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+maintitle:
+  comment: |
+    The main title of a multi-volume book, such as Collected Works. If the 
+    title or booktitle field indicates the title of a single volume which 
+    is part of multi-volume book, the title of the complete work is given 
+    in this field.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - maintitle
+  bibtex: []
+  optionalFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - proceedings
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+maintitleaddon:
+  comment: An annex to the maintitle, to be printed in a different font.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - maintitleaddon
+  bibtex: []
+  optionalFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - proceedings
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+month:
+  comment: |
+    The publication month. This must be an integer, not an ordinal or a 
+    string. Don’t say month={January} but month={1}. The bibliography style 
+    converts this to a language dependent string or ordinal where required. 
+    See also date as well as §§ 2.3.9 and 2.3.8.
+  aigaion:
+  - month
+  amsrefs: []
+  biblatex:
+  - month
+  bibtex:
+  - month
+  optionalFor:
+  - inproceedings
+  - misc
+  - mvproceedings
+  - online
+  - patent
+  - proceedings
+  - report
+  - software
+  - thesis
+  - unpublished
+  requiredBy: []
+  structure: field
+  type: datepart
+  usefulFor:
+  - article
+  - periodical
+
+'name[a–c]':
+  comment: |
+    Custom lists for special bibliography styles. Not used by the standard 
+    bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - name[a–c]
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+'name[a–c]type':
+  comment: |
+    Similar to authortype and editortype but referring to the fields 
+    name[a–c]. Not used by the standard bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - name[a–c]type
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: key
+  usefulFor: []
+
+nameaddon:
+  comment: |
+    An addon to be printed immediately after the author name in the 
+    bibliography. Not used by the standard bibliography styles. This field 
+    may be useful to add an alias or pen name (or give the real name if the 
+    pseudonym is commonly used to refer to that author).
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - nameaddon
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+note:
+  comment: |
+    Miscellaneous bibliographic data which does not fit into any other 
+    field. The note field may be used to record bibliographic data in a 
+    free format. Publication facts such as “Reprint of the edition London 
+    1831” are typical candidates for the note field. See also addendum.
+  aigaion: []
+  amsrefs:
+  - note
+  biblatex:
+  - note
+  bibtex:
+  - note
+  optionalFor:
+  - misc
+  - online
+  - patent
+  - software
+  - thesis
+  - unpublished
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - periodical
+  - proceedings
+  - report
+
+number:
+  comment: |
+    The number of a journal or the volume/number of a book in a series. See 
+    also issue as well as §§ 2.3.7 and 2.3.9. With @patent entries, this is 
+    the number or record token of a patent or patent request.
+  aigaion:
+  - number
+  amsrefs:
+  - number
+  biblatex:
+  - number
+  bibtex:
+  - number
+  - volume-number
+  optionalFor:
+  - manual
+  - report
+  requiredBy:
+  - patent
+  structure: field
+  type: literal
+  usefulFor:
+  - article
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - periodical
+  - proceedings
+
+options:
+  comment: |
+    A separated list of entry options in key = value notation. This field 
+    is used to set options on a per-entry basis. See § 3.1.3 for details. 
+    Note that citation and bibliography styles may define additional entry 
+    options.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - options
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: separated key = value options
+  usefulFor: []
+
+organization:
+  comment: |
+    The organization(s) that published a @manual or an @online resource, or 
+    sponsored a conference. See also § 2.3.4.
+  aigaion:
+  - organization
+  amsrefs:
+  - organization
+  biblatex:
+  - organization
+  bibtex:
+  - organization
+  optionalFor:
+  - inproceedings
+  - manual
+  - misc
+  - mvproceedings
+  - online
+  - proceedings
+  - software
+  requiredBy: []
+  structure: list
+  type: literal
+  usefulFor: []
+
+origdate:
+  comment: |
+    If the work is a translation, a reprint, or something similar, the 
+    publication date of the original edition. Not used by the standard 
+    bibliography styles. See also date.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - origdate
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: date
+  usefulFor: []
+
+origlanguage:
+  comment: |
+    If the work is a translation, the language of the original work. See 
+    also language.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - origlanguage
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - collection
+  - inbook
+  - incollection
+  - mvbook
+  - mvcollection
+  requiredBy: []
+  structure: field
+  type: key
+  usefulFor: []
+
+origlocation:
+  comment: |
+    If the work is a translation, a reprint, or something similar, the 
+    location of the original edition. Not used by the standard bibliography 
+    styles. See also location and § 2.3.4.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - origlocation
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: list
+  type: literal
+  usefulFor: []
+
+origpublisher:
+  comment: |
+    If the work is a translation, a reprint, or something similar, the 
+    publisher of the original edition. Not used by the standard 
+    bibliography styles. See also publisher and § 2.3.4.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - origpublisher
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: list
+  type: literal
+  usefulFor: []
+
+origtitle:
+  comment: |
+    If the work is a translation, the title of the original work. Not used 
+    by the standard bibliography styles. See also title.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - origtitle
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+pages:
+  comment: |
+    One or more page numbers or page ranges. If the work is published as 
+    part of another one, such as an article in a journal or a collection, 
+    this field holds the relevant page range in that other work. It may 
+    also be used to limit the reference to a specific part of a work (a 
+    chapter in a book, for example).
+  aigaion:
+  - firstpage
+  - lastpage
+  amsrefs:
+  - pages
+  biblatex:
+  - pages
+  bibtex:
+  - chapter-pages
+  - pages
+  optionalFor:
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - proceedings
+  - report
+  - thesis
+  requiredBy: []
+  structure: field
+  type: range
+  usefulFor:
+  - article
+  - periodical
+
+pagetotal:
+  comment: The total number of pages of the work.
+  aigaion:
+  - lastpage
+  amsrefs: []
+  biblatex:
+  - pagetotal
+  bibtex: []
+  optionalFor:
+  - book
+  - collection
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - proceedings
+  - thesis
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - booklet
+  - manual
+  - report
+
+pagination:
+  comment: |
+    The pagination of the work. The value of this field will affect the 
+    formatting the postnote argument to a citation command. The key should 
+    be given in the singular form. Possible keys are page, column, line, 
+    verse, section, and para- graph. See also bookpagination as well as §§ 
+    2.3.10 and 3.12.3.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - pagination
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: key
+  usefulFor: []
+
+part:
+  comment: |
+    The number of a partial volume. This field applies to books only, not 
+    to journals. It may be used when a logical volume consists of two or 
+    more physical ones. In this case the number of the logical volume goes 
+    in the volume field and the number of the part of that volume in the 
+    part field. See also volume.
+  aigaion: []
+  amsrefs:
+  - part
+  biblatex:
+  - part
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - proceedings
+
+pdf:
+  comment: |
+    An alias for file, provided for JabRef compatibility. See § 2.2.2.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - pdf
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: verbatim
+  usefulFor: []
+
+presort:
+  comment: |
+    A special field used to modify the sorting order of the bibliography. 
+    This field is the first item the sorting routine considers when sorting 
+    the bibliography, hence it may be used to arrange the entries in 
+    groups. This may be useful when creating subdivided bibliographies with 
+    the bibliography filters. Please refer to § 3.5 for further details. 
+    Also see § 4.5.5. This field is consumed by the backend processing and 
+    does not appear in the .bbl.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - presort
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: string
+  usefulFor: []
+
+primaryclass:
+  comment: |
+    An alias for eprintclass, provided for arXiv compatibility. See §§ 
+    2.2.2 and 3.11.7.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - primaryclass
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+publisher:
+  comment: The name(s) of the publisher(s). See also § 2.3.4.
+  aigaion:
+  - publisher
+  amsrefs:
+  - publisher
+  biblatex:
+  - publisher
+  bibtex:
+  - publisher
+  optionalFor:
+  - manual
+  requiredBy: []
+  structure: list
+  type: literal
+  usefulFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - proceedings
+
+pubstate:
+  comment: |
+    The publication state of the work, e. g., ‘in press’. See § 4.9.2.11 
+    for known publication states. (One of - inpreparation, submitted, 
+    forthcoming, inpress, prepublished) 
+  aigaion:
+  - status
+  amsrefs:
+  - status
+  biblatex:
+  - pubstate
+  bibtex: []
+  optionalFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - misc
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - online
+  - patent
+  - proceedings
+  - software
+  - thesis
+  - unpublished
+  requiredBy: []
+  structure: field
+  type: key
+  usefulFor:
+  - article
+  - booklet
+  - manual
+  - periodical
+  - report
+
+related:
+  comment: |
+    Citation keys of other entries which have a relationship to this entry. 
+    The relationship is specified by the relatedtype field. Please refer to 
+    § 3.4 for further details. relatedoptions field (separated values) 
+    Per-type options to set for a related entry. Note that this does not 
+    set the options on the related entry itself, only the dataonly clone 
+    which is used as a datasource for the parent entry.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - related
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: separated values
+  usefulFor: []
+
+relatedstring:
+  comment: |
+    A field used to override the bibliography string specified by 
+    relatedtype. Please refer to § 3.4 for further details.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - relatedstring
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+relatedtype:
+  comment: |
+    An identifier which specified the type of relationship for the keys 
+    listed in the related field. The identifier is a localized bibliography 
+    string printed before the data from the related entry list. It is also 
+    used to identify type-specific formatting directives and bibliography 
+    macros for the related entries. Please refer to § 3.4 for further 
+    details.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - relatedtype
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: identifier
+  usefulFor: []
+
+reprinttitle:
+  comment: The title of a reprint of the work. Not used by the standard styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - reprinttitle
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+school:
+  comment: |
+    An alias for institution, provided for BibTeX compatibility. The 
+    institution field is used by traditional BibTeX for technical reports 
+    whereas the school field holds the institution associated with theses. 
+    The Biblatex package employs the generic field name institution in both 
+    cases. See §§ 2.2.2 and 2.3.4.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - school
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: list
+  type: literal
+  usefulFor: []
+
+series:
+  comment: |
+    The name of a publication series, such as “Studies in ...”, or the 
+    number of a journal series. Books in a publication series are usually 
+    numbered. The number or volume of a book in a series is given in the 
+    number field. Note that the @article entry type makes use of the series 
+    field as well, but handles it in a special way. See § 2.3.7 for 
+    details.
+  aigaion:
+  - series
+  amsrefs:
+  - series
+  biblatex:
+  - series
+  bibtex:
+  - series
+  optionalFor:
+  - article
+  - manual
+  - periodical
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - proceedings
+
+shortauthor:
+  comment: |
+    The author(s) of the work, given in an abbreviated form. This field is 
+    mainly intended for abbreviated forms of corporate authors, see § 2.3.3 
+    for details.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - shortauthor
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+shorteditor:
+  comment: |
+    The editor(s) of the work, given in an abbreviated form. This field is 
+    mainly intended for abbreviated forms of corporate editors, see § 2.3.3 
+    for details.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - shorteditor
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+shorthand:
+  comment: |
+    A special designation to be used by the citation style instead of the 
+    usual label. If defined, it overrides the default label. See also 
+    label.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - shorthand
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+shorthandintro:
+  comment: |
+    The verbose citation styles which comes with this package use a phrase 
+    like “hence- forth cited as [shorthand]” to introduce shorthands on the 
+    first citation. If the shorthandintro field is defined, it overrides 
+    the standard phrase. Note that the alternative phrase must include the 
+    shorthand.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - shorthandintro
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+shortjournal:
+  comment: |
+    A short version or an acronym of the journaltitle. Not used by the 
+    standard bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - shortjournal
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+shortseries:
+  comment: |
+    A short version or an acronym of the series field. Not used by the 
+    standard bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - shortseries
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+shorttitle:
+  comment: |
+    The title in an abridged form. This field is usually not included in 
+    the bibliography. It is intended for citations in author-title format. 
+    If present, the author-title citation styles use this field instead of 
+    title.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - shorttitle
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+sortkey:
+  comment: |
+    A field used to modify the sorting order of the bibliography. Think of 
+    this field as the master sort key. If present, Biblatex uses this field 
+    during sorting and ignores everything else, except for the presort 
+    field. Please refer to § 3.5 for further details. This field is 
+    consumed by the backend processing and does not appear in the .bbl.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - sortkey
+  bibtex:
+  - key
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+sortname:
+  comment: |
+    A name or a list of names used to modify the sorting order of the 
+    bibliography. If present, this list is used instead of author or editor 
+    when sorting the bibliography. Please refer to § 3.5 for further 
+    details. This field is consumed by the backend processing and does not 
+    appear in the .bbl.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - sortname
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+sortshorthand:
+  comment: |
+    Similar to sortkey but used in the list of shorthands. If present, 
+    Biblatex uses this field instead of shorthand when sorting the list of 
+    shorthands. This is useful if the shorthand field holds shorthands with 
+    formatting commands such as \emph or \textbf. This field is consumed by 
+    the backend processing and does not appear in the .bbl.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - sortshorthand
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+sorttitle:
+  comment: |
+    A field used to modify the sorting order of the bibliography. If 
+    present, this field is used instead of the title field when sorting the 
+    bibliography. The sorttitle field may come in handy if you have an 
+    entry with a title like “An Introduction to...” and want that 
+    alphabetized under ‘I’ rather than ‘A’. In this case, you could put 
+    “Introduction to...” in the sorttitle field. Please refer to § 3.5 for 
+    further details. This field is consumed by the backend processing and 
+    does not appear in the .bbl.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - sorttitle
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+sortyear:
+  comment: |
+    A field used to modify the sorting order of the bibliography. If 
+    present, this field is used instead of the year field when sorting the 
+    bibliography. Please refer to § 3.5 for further details. This field is 
+    consumed by the backend processing and does not appear in the .bbl.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - sortyear
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+subtitle:
+  comment: The subtitle of the work.
+  aigaion: []
+  amsrefs:
+  - subtitle
+  biblatex:
+  - subtitle
+  bibtex: []
+  optionalFor:
+  - article
+  - misc
+  - online
+  - patent
+  - periodical
+  - software
+  - thesis
+  - unpublished
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - proceedings
+  - report
+
+title:
+  comment: The title of the work.
+  aigaion:
+  - title
+  amsrefs:
+  - title
+  biblatex:
+  - title
+  bibtex:
+  - title
+  optionalFor: []
+  requiredBy:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - misc
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - online
+  - patent
+  - periodical
+  - proceedings
+  - report
+  - software
+  - thesis
+  - unpublished
+  structure: field
+  type: literal
+  usefulFor: []
+
+titleaddon:
+  comment: An annex to the title, to be printed in a different font.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - titleaddon
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - misc
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - online
+  - patent
+  - proceedings
+  - report
+  - software
+  - thesis
+  - unpublished
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+translator:
+  comment: |
+    The translator(s) of the title or booktitle, depending on the entry 
+    type. If the translator is identical to the editor, the standard styles 
+    will automatically concatenate these fields in the bibliography.
+  aigaion: []
+  amsrefs:
+  - translator
+  biblatex:
+  - translator
+  bibtex: []
+  optionalFor:
+  - article
+  - book
+  - collection
+  - inbook
+  - incollection
+  - mvbook
+  - mvcollection
+  requiredBy: []
+  structure: list
+  type: name
+  usefulFor: []
+
+type:
+  comment: |
+    The type of a manual, patent, report, or thesis. This field may also be 
+    useful for the custom types listed in § 2.1.3.
+    <p> One of mathesis, phdthesis, candthesis (candidate thesis), 
+    techreport, resreport (research report), software, datacd, audiocd.</p>
+    <p> For @patent entries one of patent, patentde, patenteu, patentfr,
+    patentuk, patentus.</p>
+    <p> For @patent requests one of patreq, patreqde, patreqeu, patreqfr,
+    patrequk, patrequs.</p>
+  aigaion:
+  - report_type
+  amsrefs:
+  - type
+  biblatex:
+  - type
+  bibtex:
+  - type
+  optionalFor:
+  - misc
+  - patent
+  - software
+  requiredBy:
+  - report
+  - thesis
+  structure: field
+  type: key
+  usefulFor:
+  - booklet
+  - manual
+  - report
+
+url:
+  comment: |
+    The url of an online publication. If it is not URL-escaped (no ‘%’ 
+    chars), with Biber, it will be URI-escaped according to RFC 3987, that 
+    is, even Unicode chars will be correctly escaped.
+  aigaion:
+  - url
+  amsrefs: []
+  biblatex:
+  - url
+  bibtex: []
+  optionalFor:
+  - misc
+  requiredBy:
+  - online
+  - software
+  structure: field
+  type: uri
+  usefulFor:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - patent
+  - periodical
+  - proceedings
+  - report
+  - thesis
+  - unpublished
+
+urldate:
+  comment: |
+    The access date of the address specified in the url field. See also § 
+    2.3.8.
+  aigaion: []
+  amsrefs:
+  - accessdate
+  biblatex:
+  - urldate
+  bibtex: []
+  optionalFor:
+  - misc
+  - online
+  requiredBy:
+  - online
+  - software
+  structure: field
+  type: date
+  usefulFor:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - patent
+  - periodical
+  - proceedings
+  - report
+  - thesis
+  - unpublished
+
+'user[a–f]':
+  comment: |
+    Custom fields for special bibliography styles. Not used by the standard 
+    bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - user[a–f]
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+venue:
+  comment: |
+    The location of a conference, a symposium, or some other event in 
+    @proceedings and @inproceedings entries. This field may also be useful 
+    for the custom types listed in § 2.1.3. Note that the location list 
+    holds the place of publication. It therefore corresponds to the 
+    publisher and institution lists. The location of the event is given in 
+    the venue field. See also eventdate and eventtitle.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - venue
+  bibtex: []
+  optionalFor:
+  - inproceedings
+  - mvproceedings
+  - proceedings
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+'verb[a–c]':
+  comment: |
+    Similar to the custom fields above except that these are verbatim 
+    fields. Not used by the standard bibliography styles.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - verb[a–c]
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+version:
+  comment: The revision number of a piece of software, a manual, etc.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - version
+  bibtex: []
+  optionalFor:
+  - manual
+  - misc
+  - online
+  - patent
+  - report
+  - software
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - article
+  - periodical
+
+volume:
+  comment: The volume of a multi-volume book or a periodical. See also part.
+  aigaion:
+  - volume
+  amsrefs:
+  - volume
+  biblatex:
+  - volume
+  bibtex:
+  - volume
+  - volume-number
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - article
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - periodical
+  - proceedings
+
+volumes:
+  comment: |
+    The total number of volumes of a multi-volume work. Depending on the 
+    entry type, this field refers to title or maintitle.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - volumes
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor:
+  - book
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - proceedings
+
+xdata:
+  comment: |
+    This field inherits data from one or more @xdata entries. Conceptually, 
+    the xdata field is related to crossref and xref: crossref establishes a 
+    logical parent/child relation and inherits data; xref establishes as 
+    logical parent/child relation without inheriting data; xdata inherits 
+    data without establishing a relation. The value of the xdata may be a 
+    single entry key or a separated list of keys. See § 3.11.6 for further 
+    details. This field is consumed by the backend processing and does not 
+    appear in the .bbl.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - xdata
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: separated list of entrykeys
+  usefulFor: []
+
+xref:
+  comment: |
+    This field is an alternative cross-referencing mechanism. It differs 
+    from crossref in that the child entry will not inherit any data from 
+    the parent entry specified in the xref field. If the number of child 
+    entries referencing a specific parent entry hits a certain threshold, 
+    the parent entry is automatically added to the bibliography even if it 
+    has not been cited explicitly. The threshold is settable with the 
+    mincrossrefs package option from § 3.1.2.1. Style authors should note 
+    that whether or not the xref fields of the child entries are defined on 
+    the Biblatex level depends on the availability of the parent entry. If 
+    the parent entry is available, the xref fields of the child entries 
+    will be defined. If not, their xref fields will be undefined. Whether 
+    the parent entry is added to the bibliography implicitly because of the 
+    threshold or explicitly because it has been cited does not matter. See 
+    also the crossref field in this section as well as § 2.4.1.
+  aigaion: []
+  amsrefs:
+  - xref
+  biblatex:
+  - xref
+  bibtex: []
+  optionalFor: []
+  requiredBy: []
+  structure: field
+  type: entry key
+  usefulFor: []
+
+year:
+  comment: The year of publication. See also date and § 2.3.8.
+  aigaion:
+  - year
+  amsrefs: []
+  biblatex:
+  - year
+  bibtex:
+  - year
+  optionalFor:
+  - misc
+  - online
+  - patent
+  - periodical
+  - software
+  - unpublished
+  requiredBy: []
+  structure: field
+  type: literal
+  usefulFor: []
+
+year-date:
+  comment: Either year or data but not both.
+  aigaion: []
+  amsrefs: []
+  biblatex:
+  - year-date
+  bibtex: []
+  optionalFor: []
+  requiredBy:
+  - article
+  - book
+  - booklet
+  - collection
+  - inbook
+  - incollection
+  - inproceedings
+  - manual
+  - misc
+  - mvbook
+  - mvcollection
+  - mvproceedings
+  - online
+  - patent
+  - periodical
+  - proceedings
+  - report
+  - software
+  - thesis
+  - unpublished
+  structure: field
+  type: choice
+  usefulFor: []
+

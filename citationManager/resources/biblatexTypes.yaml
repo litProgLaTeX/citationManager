@@ -1,0 +1,1517 @@
+article:
+  comment: |
+    An article in a journal, magazine, newspaper, or other periodical which 
+    forms a self-contained unit with its own title. The title of the 
+    periodical is given in the journaltitle field. If the issue has its own 
+    title in addition to the main title of the periodical, it goes in the 
+    issuetitle field. Note that editor and related fields refer to the 
+    journal while translator and related fields refer to the article.
+  aigaion:
+  - article
+  aliases: 
+  amsrefs:
+  - article
+  biblatex:
+  - article
+  bibtex:
+  - article
+  optionalFields:
+  - addendum
+  - annotator
+  - commentator
+  - editor
+  - editora
+  - editorb
+  - editorc
+  - eprintclass
+  - eprinttype
+  - issuesubtitle
+  - issuetitle
+  - journalsubtitle
+  - language
+  - origlanguage
+  - series
+  - subtitle
+  - titleaddon
+  - translator
+  requiredFields:
+  - author
+  - citekey
+  - entrytype
+  - journaltitle
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - eid
+  - eprint
+  - issn
+  - issue
+  - month
+  - note
+  - number
+  - pages
+  - pubstate
+  - url
+  - urldate
+  - version
+  - volume
+
+artwork:
+  comment: |
+    Works of the visual arts such as paintings, sculpture, and 
+    installations.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - artwork
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+audio:
+  comment: |
+    Audio recordings, typically on audio cd, dvd, audio cassette, or 
+    similar media. See also @music.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - audio
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+bibnote:
+  comment: |
+    This special entry type is not meant to be used in the bib file like 
+    other types. It is provided for third-party packages like notes2bib 
+    which merge notes into the bib- liography. The notes should go into the 
+    note field. Be advised that the @bibnote type is not related to the 
+    \defbibnote command in any way. \defbibnote is for adding comments at 
+    the beginning or the end of the bibliography, whereas the @bibnote type 
+    is meant for packages which render endnotes as bibliography entries.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - bibnote
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+book:
+  comment: |
+    A single-volume book with one or more authors where the authors share
+    credit for the work as a whole. This entry type also covers the
+    function of the @inbook type of traditional BibTeX, see § 2.3.1 for
+    details.
+  aigaion:
+  - book
+  aliases: 
+  amsrefs:
+  - book
+  biblatex:
+  - book
+  bibtex:
+  - book
+  optionalFields:
+  - addendum
+  - afterword
+  - annotator
+  - chapter
+  - commentator
+  - editora
+  - editorb
+  - editorc
+  - eprintclass
+  - eprinttype
+  - foreword
+  - introduction
+  - language
+  - mainsubtitle
+  - maintitle
+  - maintitleaddon
+  - origlanguage
+  - pages
+  - pagetotal
+  - pubstate
+  - titleaddon
+  - translator
+  requiredFields:
+  - author
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - edition
+  - editor
+  - eprint
+  - isbn
+  - location
+  - note
+  - number
+  - part
+  - publisher
+  - series
+  - subtitle
+  - url
+  - urldate
+  - volume
+  - volumes
+
+bookinbook:
+  comment: |
+    This type is similar to @inbook but intended for works originally 
+    published as a stand-alone book. A typical example are books reprinted 
+    in the collected works of an author.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - bookinbook
+  bibtex: []
+  optionalFields: []
+  requiredFields:
+  - citekey
+  - entrytype
+  type: primary
+  usefulFields: []
+
+booklet:
+  comment: |
+    A book-like work without a formal publisher or sponsoring institution. 
+    Use the field howpublished to supply publishing information in free 
+    format, if applicable. The field type may be useful as well.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - booklet
+  bibtex:
+  - booklet
+  optionalFields:
+  - addendum
+  - chapter
+  - eprintclass
+  - eprinttype
+  - howpublished
+  - language
+  - pages
+  - titleaddon
+  requiredFields:
+  - author-editor
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - eprint
+  - location
+  - note
+  - pagetotal
+  - pubstate
+  - subtitle
+  - type
+  - url
+  - urldate
+
+collection:
+  comment: |
+    A single-volume collection with multiple, self-contained contributions 
+    by distinct authors which have their own title. The work as a whole has 
+    no overall author but it will usually have an editor.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - collection
+  bibtex: []
+  optionalFields:
+  - addendum
+  - afterword
+  - annotator
+  - chapter
+  - commentator
+  - editora
+  - editorb
+  - editorc
+  - eprintclass
+  - eprinttype
+  - foreword
+  - introduction
+  - language
+  - mainsubtitle
+  - maintitle
+  - maintitleaddon
+  - origlanguage
+  - pages
+  - pagetotal
+  - pubstate
+  - titleaddon
+  - translator
+  requiredFields:
+  - citekey
+  - editor
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - edition
+  - eprint
+  - isbn
+  - location
+  - note
+  - number
+  - part
+  - publisher
+  - series
+  - subtitle
+  - url
+  - urldate
+  - volume
+  - volumes
+
+commentary:
+  comment: |
+    Commentaries which have a status different from regular books, such as 
+    legal commentaries.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - commentary
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+conference:
+  comment: A BibTeX legacy alias for @inproceedings.
+  aigaion: []
+  aliases:
+  - inproceedings
+  amsrefs: []
+  biblatex:
+  - conference
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: aliases
+  usefulFields: []
+
+'custom[a–f]':
+  comment: |
+    Custom types for special bibliography styles. Not used by the standard 
+    styles.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - custom[a–f]
+  bibtex: []
+  optionalFields: []
+  requiredFields:
+  - citekey
+  - entrytype
+  type: primary
+  usefulFields: []
+
+electronic:
+  comment: An alias for @online.
+  aigaion: []
+  aliases:
+  - online
+  amsrefs: []
+  biblatex:
+  - electronic
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: aliases
+  usefulFields: []
+
+image:
+  comment: Images, pictures, photographs, and similar media.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - image
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+inbook:
+  comment: |
+    A part of a book which forms a self-contained unit with its own title. 
+    Note that the profile of this entry type is different from standard 
+    BibTeX, see § 2.3.1.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - inbook
+  bibtex:
+  - inbook
+  optionalFields:
+  - addendum
+  - afterword
+  - annotator
+  - bookauthor
+  - booksubtitle
+  - booktitleaddon
+  - chapter
+  - commentator
+  - editora
+  - editorb
+  - editorc
+  - eprintclass
+  - eprinttype
+  - foreword
+  - introduction
+  - language
+  - mainsubtitle
+  - maintitle
+  - maintitleaddon
+  - origlanguage
+  - pages
+  - pubstate
+  - titleaddon
+  - translator
+  requiredFields:
+  - author
+  - booktitle
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - edition
+  - editor
+  - eprint
+  - isbn
+  - location
+  - note
+  - number
+  - part
+  - publisher
+  - series
+  - subtitle
+  - url
+  - urldate
+  - volume
+  - volumes
+
+incollection:
+  comment: |
+    A contribution to a collection which forms a self-contained unit with a 
+    distinct author and title. The author refers to the title, the editor 
+    to the booktitle, i. e., the title of the collection.
+  aigaion:
+  - incollection
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - incollection
+  bibtex:
+  - incollection
+  optionalFields:
+  - addendum
+  - afterword
+  - annotator
+  - booksubtitle
+  - booktitleaddon
+  - chapter
+  - commentator
+  - editor
+  - editora
+  - editorb
+  - editorc
+  - eprintclass
+  - eprinttype
+  - foreword
+  - introduction
+  - language
+  - mainsubtitle
+  - maintitle
+  - maintitleaddon
+  - origlanguage
+  - pages
+  - pubstate
+  - titleaddon
+  - translator
+  requiredFields:
+  - author
+  - booktitle
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - edition
+  - eprint
+  - isbn
+  - location
+  - note
+  - number
+  - part
+  - publisher
+  - series
+  - subtitle
+  - url
+  - urldate
+  - volume
+  - volumes
+
+inproceedings:
+  comment: |
+    An article in a conference proceedings. This type is similar to 
+    @incollection. It supports an optional organization field.
+  aigaion:
+  - inproceedings
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - inproceedings
+  bibtex:
+  - conference
+  - inproceedings
+  optionalFields:
+  - addendum
+  - booksubtitle
+  - booktitleaddon
+  - chapter
+  - editor
+  - eprintclass
+  - eprinttype
+  - eventdate
+  - eventtitle
+  - eventtitleaddon
+  - language
+  - mainsubtitle
+  - maintitle
+  - maintitleaddon
+  - month
+  - organization
+  - pages
+  - pubstate
+  - titleaddon
+  - venue
+  requiredFields:
+  - author
+  - booktitle
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - edition
+  - eprint
+  - isbn
+  - location
+  - note
+  - number
+  - part
+  - publisher
+  - series
+  - subtitle
+  - url
+  - urldate
+  - volume
+  - volumes
+
+inreference:
+  comment: |
+    An article in a work of reference. This is a more specific variant of 
+    the generic @incollection entry type. The standard styles will treat 
+    this entry type as an alias for @incollection.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - inreference
+  bibtex: []
+  optionalFields: []
+  requiredFields:
+  - citekey
+  - entrytype
+  type: primary
+  usefulFields: []
+
+jurisdiction:
+  comment: Court decisions, court recordings, and similar things.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - jurisdiction
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+legal:
+  comment: Legal documents such as treaties.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - legal
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+legislation:
+  comment: Laws, bills, legislative proposals, and similar things.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - legislation
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+letter:
+  comment: Personal correspondence such as letters, emails, memoranda, etc.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - letter
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+manual:
+  comment: |
+    Technical or other documentation, not necessarily in printed form. The 
+    author or editor is omissible in terms of § 2.3.2.
+  aigaion:
+  - manual
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - manual
+  bibtex:
+  - manual
+  optionalFields:
+  - addendum
+  - chapter
+  - edition
+  - eprintclass
+  - eprinttype
+  - isbn
+  - language
+  - number
+  - organization
+  - pages
+  - publisher
+  - series
+  - titleaddon
+  - version
+  requiredFields:
+  - author-editor
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - eprint
+  - location
+  - note
+  - pagetotal
+  - pubstate
+  - subtitle
+  - type
+  - url
+  - urldate
+
+mastersthesis:
+  comment: |
+    Similar to @thesis except that the type field is optional and defaults 
+    to the localized term ‘Master’s thesis’. You may still use the type 
+    field to override that.
+  aigaion: []
+  aliases:
+  - thesis
+  amsrefs: []
+  biblatex:
+  - mastersthesis
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: aliases
+  usefulFields: []
+
+misc:
+  comment: |
+    A fallback type for entries which do not fit into any other category. 
+    Use the field howpublished to supply publishing information in free 
+    format, if applicable. The field type may be useful as well. author, 
+    editor, and year are omissible in terms of § 2.3.2.
+  aigaion: []
+  aliases: 
+  amsrefs:
+  - misc
+  biblatex:
+  - misc
+  bibtex:
+  - misc
+  optionalFields:
+  - addendum
+  - date
+  - doi
+  - eprint
+  - eprintclass
+  - eprinttype
+  - howpublished
+  - language
+  - location
+  - month
+  - note
+  - organization
+  - pubstate
+  - subtitle
+  - titleaddon
+  - type
+  - url
+  - urldate
+  - version
+  - year
+  requiredFields:
+  - author-editor
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields: []
+
+movie:
+  comment: Motion pictures. See also @video.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - movie
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+music:
+  comment: Musical recordings. This is a more specific variant of @audio.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - music
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+mvbook:
+  comment: |
+    A multi-volume @book. For backwards compatibility, multi-volume books 
+    are also supported by the entry type @book. However, it is advisable to 
+    make use of the dedicated entry type @mvbook.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - mvbook
+  bibtex: []
+  optionalFields:
+  - addendum
+  - afterword
+  - annotator
+  - commentator
+  - editora
+  - editorb
+  - editorc
+  - eprintclass
+  - eprinttype
+  - foreword
+  - introduction
+  - language
+  - origlanguage
+  - pagetotal
+  - pubstate
+  - titleaddon
+  - translator
+  requiredFields:
+  - author
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - edition
+  - editor
+  - eprint
+  - isbn
+  - location
+  - note
+  - number
+  - part
+  - publisher
+  - series
+  - subtitle
+  - url
+  - urldate
+  - volume
+  - volumes
+
+mvcollection:
+  comment: |
+    A multi-volume @collection. For backwards compatibility, multi-volume 
+    collections are also supported by the entry type @collection. 
+    However, it is advisable to make use of the dedicated entry type 
+    @mvcollection.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - mvcollection
+  bibtex: []
+  optionalFields:
+  - addendum
+  - afterword
+  - annotator
+  - commentator
+  - editora
+  - editorb
+  - editorc
+  - eprintclass
+  - eprinttype
+  - foreword
+  - introduction
+  - language
+  - origlanguage
+  - pagetotal
+  - pubstate
+  - titleaddon
+  - translator
+  requiredFields:
+  - citekey
+  - editor
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - edition
+  - eprint
+  - isbn
+  - location
+  - note
+  - number
+  - part
+  - publisher
+  - series
+  - subtitle
+  - url
+  - urldate
+  - volume
+  - volumes
+
+mvproceedings:
+  comment: |
+    A multi-volume @proceedings entry. For backwards compatibility, 
+    multi-volume proceedings are also supported by the entry type 
+    @proceedings. However, it is advisable to make use of the dedicated 
+    entry type @mvproceedings
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - mvproceedings
+  bibtex: []
+  optionalFields:
+  - addendum
+  - editor
+  - eprintclass
+  - eprinttype
+  - eventdate
+  - eventtitle
+  - eventtitleaddon
+  - language
+  - month
+  - organization
+  - pagetotal
+  - pubstate
+  - titleaddon
+  - venue
+  requiredFields:
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - edition
+  - eprint
+  - isbn
+  - location
+  - note
+  - number
+  - part
+  - publisher
+  - series
+  - subtitle
+  - url
+  - urldate
+  - volume
+  - volumes
+
+mvreference:
+  comment: |
+    A multi-volume @reference entry. The standard styles will treat this 
+    entry type as an alias for @mvcollection. For backwards compatibility, 
+    multi-volume refer- ences are also supported by the entry type 
+    @reference. However, it is advisable to make use of the dedicated entry 
+    type @mvreference.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - mvreference
+  bibtex: []
+  optionalFields: []
+  requiredFields:
+  - citekey
+  - entrytype
+  type: primary
+  usefulFields: []
+
+online:
+  comment: |
+    An online resource. author, editor, and year are omissible in terms of 
+    § 2.3.2. This entry type is intended for sources such as web sites 
+    which are intrinsically online resources. Note that all entry types 
+    support the url field. For example, when adding an article from an 
+    online journal, it may be preferable to use the @article type and its 
+    url field.
+  aigaion: []
+  aliases: 
+  amsrefs:
+  - webpage
+  biblatex:
+  - online
+  bibtex: []
+  optionalFields:
+  - addendum
+  - date
+  - editor
+  - language
+  - month
+  - note
+  - organization
+  - pubstate
+  - subtitle
+  - titleaddon
+  - urldate
+  - version
+  - year
+  requiredFields:
+  - author
+  - citekey
+  - entrytype
+  - title
+  - url
+  - urldate
+  - year-date
+  type: primary
+  useFulFields: []
+  usefulFields: []
+
+patent:
+  comment: |
+    A patent or patent request. The number or record token is given in the 
+    number field. Use the type field to specify the type and the location 
+    field to indicate the scope of the patent, if different from the scope 
+    implied by the type. Note that the location field is treated as a key 
+    list with this entry type, see § 2.2.1 for details.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - patent
+  bibtex: []
+  optionalFields:
+  - addendum
+  - date
+  - eprintclass
+  - eprinttype
+  - holder
+  - location
+  - month
+  - note
+  - pubstate
+  - subtitle
+  - titleaddon
+  - type
+  - version
+  - year
+  requiredFields:
+  - author
+  - citekey
+  - entrytype
+  - number
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - eprint
+  - url
+  - urldate
+
+performance:
+  comment: |
+    Musical and theatrical performances as well as other works of the 
+    performing arts. This type refers to the event as opposed to a 
+    recording, a score, or a printed play.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - performance
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+periodical:
+  comment: |
+    An complete issue of a periodical, such as a special issue of a 
+    journal. The title of the periodical is given in the title field. If 
+    the issue has its own title in addition to the main title of the 
+    periodical, it goes in the issuetitle field. The editor is omissible in 
+    terms of § 2.3.2.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - periodical
+  bibtex: []
+  optionalFields:
+  - addendum
+  - date
+  - editora
+  - editorb
+  - editorc
+  - eprintclass
+  - eprinttype
+  - issuesubtitle
+  - issuetitle
+  - language
+  - series
+  - subtitle
+  - year
+  requiredFields:
+  - citekey
+  - editor
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - eid
+  - eprint
+  - issn
+  - issue
+  - month
+  - note
+  - number
+  - pages
+  - pubstate
+  - url
+  - urldate
+  - version
+  - volume
+
+phdthesis:
+  comment: |
+    Similar to @thesis except that the type field is optional and defaults 
+    to the localized term ‘PhD thesis’. You may still use the type field to 
+    override that.
+  aigaion: []
+  aliases:
+  - thesis
+  amsrefs: []
+  biblatex:
+  - phdthesis
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: aliases
+  usefulFields: []
+
+proceedings:
+  comment: |
+    A single-volume conference proceedings. This type is very similar to 
+    @collection. It supports an optional organization field which holds the 
+    sponsoring institution. The editor is omissible in terms of § 2.3.2.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - proceedings
+  bibtex:
+  - proceedings
+  optionalFields:
+  - addendum
+  - chapter
+  - editor
+  - eprintclass
+  - eprinttype
+  - eventdate
+  - eventtitle
+  - eventtitleaddon
+  - language
+  - mainsubtitle
+  - maintitle
+  - maintitleaddon
+  - month
+  - organization
+  - pages
+  - pagetotal
+  - pubstate
+  - titleaddon
+  - venue
+  requiredFields:
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - edition
+  - eprint
+  - isbn
+  - location
+  - note
+  - number
+  - part
+  - publisher
+  - series
+  - subtitle
+  - url
+  - urldate
+  - volume
+  - volumes
+
+reference:
+  comment: |
+    A single-volume work of reference such as an encyclopedia or a 
+    dictionary. This is a more specific variant of the generic @collection 
+    entry type. The standard styles will treat this entry type as an alias 
+    for @collection.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - reference
+  bibtex: []
+  optionalFields: []
+  requiredFields:
+  - citekey
+  - entrytype
+  type: primary
+  usefulFields: []
+
+report:
+  comment: |
+    A technical report, research report, or white paper published by a 
+    university or some other institution. Use the type field to specify the 
+    type of report. The sponsoring institution goes in the institution 
+    field.
+  aigaion:
+  - techreport
+  aliases: 
+  amsrefs:
+  - report
+  biblatex:
+  - report
+  bibtex:
+  - techreport
+  optionalFields:
+  - addendum
+  - chapter
+  - eprintclass
+  - eprinttype
+  - isrn
+  - language
+  - month
+  - number
+  - pages
+  - titleaddon
+  - version
+  requiredFields:
+  - author
+  - citekey
+  - entrytype
+  - institution
+  - title
+  - type
+  - year-date
+  type: primary
+  usefulFields:
+  - doi
+  - eprint
+  - location
+  - note
+  - pagetotal
+  - pubstate
+  - subtitle
+  - type
+  - url
+  - urldate
+
+review:
+  comment: |
+    Reviews of some other work. This is a more specific variant of the 
+    @article type. The standard styles will treat this entry type as an 
+    alias for @article.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - review
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+set:
+  comment: |
+    An entry set. This entry type is special, see § 3.11.5 for details.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - set
+  bibtex: []
+  optionalFields: []
+  requiredFields:
+  - citekey
+  - entrytype
+  type: primary
+  usefulFields: []
+
+software:
+  comment: Computer software.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - software
+  bibtex: []
+  optionalFields:
+  - addendum
+  - date
+  - doi
+  - editor
+  - eprint
+  - eprintclass
+  - eprinttype
+  - language
+  - location
+  - month
+  - note
+  - organization
+  - pubstate
+  - subtitle
+  - titleaddon
+  - type
+  - version
+  - year
+  requiredFields:
+  - author
+  - citekey
+  - entrytype
+  - howpublished
+  - title
+  - url
+  - urldate
+  - year-date
+  type: unsupported
+  usefulFields: []
+
+standard:
+  comment: |
+    National and international standards issued by a standards body such as 
+    the International Organization for Standardization.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - standard
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+suppbook:
+  comment: |
+    Supplemental material in a @book. This type is closely related to the 
+    @inbook entry type. While @inbook is primarily intended for a part of a 
+    book with its own title (e. g., a single essay in a collection of 
+    essays by the same author), this type is provided for elements such as 
+    prefaces, introductions, forewords, afterwords, etc. which often have a 
+    generic title only. Style guides may require such items to be formatted 
+    differently from other @inbook items. The standard styles will treat 
+    this entry type as an alias for @inbook.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - suppbook
+  bibtex: []
+  optionalFields: []
+  requiredFields:
+  - citekey
+  - entrytype
+  type: primary
+  usefulFields: []
+
+suppcollection:
+  comment: |
+    Supplemental material in a @collection. This type is similar to 
+    @suppbook but related to the @collection entry type. The standard 
+    styles will treat this entry type as an alias for @incollection.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - suppcollection
+  bibtex: []
+  optionalFields: []
+  requiredFields:
+  - citekey
+  - entrytype
+  type: primary
+  usefulFields: []
+
+suppperiodical:
+  comment: |
+    Supplemental material in a @periodical. This type is similar to 
+    @suppbook but related to the @periodical entry type. The role of this 
+    entry type may be more obvious if you bear in mind that the @article 
+    type could also be called @inperiodical. This type may be useful when 
+    referring to items such as regular columns, obituaries, letters to the 
+    editor, etc. which only have a generic title. Style guides may require 
+    such items to be formatted differently from articles in the strict 
+    sense of the word. The standard styles will treat this entry type as an 
+    alias for @article.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - suppperiodical
+  bibtex: []
+  optionalFields: []
+  requiredFields:
+  - citekey
+  - entrytype
+  type: primary
+  usefulFields: []
+
+techreport:
+  comment: |
+    Similar to @report except that the type field is optional and defaults 
+    to the localized term ‘technical report’. You may still use the type 
+    field to override that.
+  aigaion: []
+  aliases:
+  - report
+  amsrefs: []
+  biblatex:
+  - techreport
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: aliases
+  usefulFields: []
+
+thesis:
+  comment: |
+    A thesis written for an educational institution to satisfy the 
+    requirements for a degree. Use the type field to specify the type of 
+    thesis.
+  aigaion:
+  - mastersthesis
+  - phdthesis
+  aliases: 
+  amsrefs:
+  - thesis
+  biblatex:
+  - thesis
+  bibtex:
+  - mastersthesis
+  - phdthesis
+  optionalFields:
+  - addendum
+  - chapter
+  - doi
+  - eprintclass
+  - eprinttype
+  - isbn
+  - language
+  - location
+  - month
+  - note
+  - pages
+  - pagetotal
+  - pubstate
+  - subtitle
+  - titleaddon
+  requiredFields:
+  - author
+  - citekey
+  - entrytype
+  - institution
+  - title
+  - type
+  - year-date
+  type: primary
+  usefulFields:
+  - eprint
+  - url
+  - urldate
+
+unpublished:
+  comment: |
+    A work with an author and a title which has not been formally 
+    published, such as a manuscript or the script of a talk. Use the fields 
+    howpublished and note to supply additional information in free format, 
+    if applicable.
+  aigaion:
+  - unpublished
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - unpublished
+  bibtex:
+  - unpublished
+  optionalFields:
+  - addendum
+  - date
+  - howpublished
+  - isbn
+  - language
+  - location
+  - month
+  - note
+  - pubstate
+  - subtitle
+  - titleaddon
+  - year
+  requiredFields:
+  - author
+  - citekey
+  - entrytype
+  - title
+  - year-date
+  type: primary
+  usefulFields:
+  - eprint
+  - url
+  - urldate
+
+video:
+  comment: |
+    Audiovisual recordings, typically on dvd, vhs cassette, or similar 
+    media. See also @movie.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - video
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: unsupported
+  usefulFields: []
+
+www:
+  comment: An alias for @online, provided for jurabib compatibility.
+  aigaion: []
+  aliases:
+  - online
+  amsrefs: []
+  biblatex:
+  - www
+  bibtex: []
+  optionalFields: []
+  requiredFields: []
+  type: aliases
+  usefulFields: []
+
+xdata:
+  comment: |
+    This entry type is special. @xdata entries hold data which may be 
+    inherited by other entries using the xdata field. Entries of this type 
+    only serve as data containers; they may not be cited or added to the 
+    bibliography. See § 3.11.6 for details.
+  aigaion: []
+  aliases: 
+  amsrefs: []
+  biblatex:
+  - xdata
+  bibtex: []
+  optionalFields: []
+  requiredFields:
+  - citekey
+  - entrytype
+  type: primary
+  usefulFields: []
+

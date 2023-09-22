@@ -1,0 +1,168 @@
+ABST:
+  biblatex: article
+  comment: Abstract
+ADVS:
+  biblatex: null
+  comment: Audiovisual material
+AGGR:
+  biblatex: null
+  comment: Aggregated Database
+ANCIENT:
+  biblatex: null
+  comment: Ancient Text
+ART:
+  biblatex: artwork
+  comment: Art Work
+BILL:
+  biblatex: legislation
+  comment: Bill
+BLOG:
+  biblatex: online
+  comment: Blog
+BOOK:
+  biblatex: book
+  comment: Whole book
+CASE:
+  biblatex: legislation
+  comment: Case
+CHAP:
+  biblatex: inbook
+  comment: Book chapter
+CHART:
+  biblatex: null
+  comment: Chart
+CLSWK:
+  biblatex: null
+  comment: Classical Work
+COMP:
+  biblatex: null
+  comment: Computer program
+CONF:
+  biblatex: inproceedings
+  comment: Conference proceeding
+CPAPER:
+  biblatex: inproceedings
+  comment: Conference paper
+CTLG:
+  biblatex: null
+  comment: Catalog
+DATA:
+  biblatex: null
+  comment: Data file
+DBASE:
+  biblatex: null
+  comment: Online Database
+DICT:
+  biblatex: null
+  comment: Dictionary
+EBOOK:
+  biblatex: online
+  comment: Electronic Book
+ECHAP:
+  biblatex: online
+  comment: Electronic Book Section
+EDBOOK:
+  biblatex: book
+  comment: Edited Book
+EJOUR:
+  biblatex: online
+  comment: Electronic Article
+ENCYC:
+  biblatex: reference
+  comment: Encyclopedia
+EQUA:
+  biblatex: null
+  comment: Equation
+FIGURE:
+  biblatex: null
+  comment: Figure
+GEN:
+  biblatex: null
+  comment: Generic
+GOVDOC:
+  biblatex: null
+  comment: Government Document
+GRANT:
+  biblatex: null
+  comment: Grant
+HEAR:
+  biblatex: jurisdiction
+  comment: Hearing
+ICOMM:
+  biblatex: letter
+  comment: Internet Communication
+INPR:
+  biblatex: book
+  comment: In Press
+JFULL:
+  biblatex: article
+  comment: Journal (full)
+JOUR:
+  biblatex: article
+  comment: Journal
+LEGAL:
+  biblatex: legislation
+  comment: Legal Rule or Regulation
+MANSCPT:
+  biblatex: unpublished
+  comment: Manuscript
+MAP:
+  biblatex: null
+  comment: Map
+MGZN:
+  biblatex: article
+  comment: Magazine article
+MPCT:
+  biblatex: movie
+  comment: Motion picture
+MULTI:
+  biblatex: null
+  comment: Online Multimedia
+MUSIC:
+  biblatex: null
+  comment: Music score
+NEWS:
+  biblatex: article
+  comment: Newspaper
+PAMP:
+  biblatex: null
+  comment: Pamphlet
+PAT:
+  biblatex: patent
+  comment: Patent
+PCOMM:
+  biblatex: null
+  comment: Personal communication
+RPRT:
+  biblatex: report
+  comment: Report
+SER:
+  biblatex: null
+  comment: Serial publication
+SLIDE:
+  biblatex: null
+  comment: Slide
+SOUND:
+  biblatex: audio
+  comment: Sound recording
+STAND:
+  biblatex: standard
+  comment: Standard
+STAT:
+  biblatex: legislation
+  comment: Statute
+THES:
+  biblatex: thesis
+  comment: Thesis/Dissertation
+UNBILL:
+  biblatex: legislation
+  comment: Unenacted Bill
+UNPB:
+  biblatex: unpublished
+  comment: Unpublished work
+VIDEO:
+  biblatex: video
+  comment: Video recording
+WEB:
+  biblatex: online
+  comment: Web Page

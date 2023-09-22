@@ -1,0 +1,10 @@
+#!.venv/bin/python
+
+import os
+import yaml
+
+with open(os.path.expanduser("~/.config/citationManager/config.yaml")) as cFile :
+  config = yaml.safe_load(cFile.read())
+
+print(yaml.dump(config))
+

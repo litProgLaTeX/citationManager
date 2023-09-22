@@ -1,0 +1,271 @@
+A1:
+  biblatex: author
+  comment: Primary Authors (each author on its own line preceded by
+    the tag)
+A2:
+  biblatex: null
+  comment: Secondary Authors (each author on its own line preceded
+    by the tag)
+A3:
+  biblatex: null
+  comment: Tertiary Authors (each author on its own line preceded by
+    the tag)
+A4:
+  biblatex: null
+  comment: Subsidiary Authors (each author on its own line preceded
+    by the tag)
+AB:
+  biblatex: abstract
+  comment: Abstract
+AD:
+  biblatex: null
+  comment: Author Address
+AN:
+  biblatex: null
+  comment: Accession Number
+AU:
+  biblatex: author
+  comment: Author (each author on its own line preceded by the tag)
+AV:
+  biblatex: null
+  comment: Location in Archives
+BT:
+  biblatex: null
+  comment: This field maps to T2 for all reference types except for
+    Whole Book and Unpublished Work references. It can contain alphanumeric
+    characters. There is no practical limit to the length of this field.
+C1:
+  biblatex: null
+  comment: Custom 1
+C2:
+  biblatex: null
+  comment: Custom 2
+C3:
+  biblatex: null
+  comment: Custom 3
+C4:
+  biblatex: null
+  comment: Custom 4
+C5:
+  biblatex: null
+  comment: Custom 5
+C6:
+  biblatex: null
+  comment: Custom 6
+C7:
+  biblatex: null
+  comment: Custom 7
+C8:
+  biblatex: null
+  comment: Custom 8
+CA:
+  biblatex: null
+  comment: Caption
+CN:
+  biblatex: callNumber
+  comment: Call Number
+CP:
+  biblatex: null
+  comment: This field can contain alphanumeric characters. There is
+    no practical limit to the length of this field.
+CT:
+  biblatex: null
+  comment: Title of unpublished reference
+CY:
+  biblatex: address
+  comment: Place Published
+DA:
+  biblatex: date
+  comment: Date
+DB:
+  biblatex: null
+  comment: Name of Database
+DO:
+  biblatex: doi
+  comment: DOI
+DP:
+  biblatex: null
+  comment: Database Provider
+ED:
+  biblatex: editor
+  comment: Editor
+EP:
+  biblatex: lastpage
+  comment: End Page
+ER:
+  biblatex: null
+  comment: End of Reference (must be empty and the last tag)
+ET:
+  biblatex: edition
+  comment: Edition
+ID:
+  biblatex: null
+  comment: Reference
+IS:
+  biblatex: issue
+  comment: Issue number
+J1:
+  biblatex: null
+  comment: 'Periodical name: user abbreviation 1. This is an alphanumeric
+    field of up to 255 characters.'
+J2:
+  biblatex: null
+  comment: Alternate Title (this field is used for the abbreviated
+    title of a book or journal name, the latter mapped to T2)
+JA:
+  biblatex: journal
+  comment: 'Periodical name: standard abbreviation. This is the periodical
+    in which the article was (or is to be, in the case of in-press
+    references) published. This is an alphanumeric field of up to 255
+    characters.'
+JF:
+  biblatex: null
+  comment: 'Journal/Periodical name: full format. This is an alphanumeric
+    field of up to 255 characters.'
+JO:
+  biblatex: null
+  comment: 'Journal/Periodical name: full format. This is an alphanumeric
+    field of up to 255 characters.'
+KW:
+  biblatex: keywords
+  comment: Keywords (keywords should be entered each on its own line
+    preceded by the tag)
+L1:
+  biblatex: url
+  comment: Link to PDF. There is no practical limit to the length of
+    this field. URL addresses can be entered individually, one per
+    tag or multiple addresses can be entered on one line using a semi-colon
+    as a separator. These links should end with a file name, and not
+    simply a landing page. Use the UR tag for URL links.
+L2:
+  biblatex: url
+  comment: Link to Full-text. There is no practical limit to the length
+    of this field. URL addresses can be entered individually, one per
+    tag or multiple addresses can be entered on one line using a semi-colon
+    as a separator.
+L3:
+  biblatex: null
+  comment: Related Records. There is no practical limit to the length
+    of this field.
+L4:
+  biblatex: null
+  comment: Image(s). There is no practical limit to the length of this
+    field.
+LA:
+  biblatex: language
+  comment: Language
+LB:
+  biblatex: null
+  comment: Label
+LK:
+  biblatex: null
+  comment: Website Link
+M1:
+  biblatex: null
+  comment: Number
+M2:
+  biblatex: null
+  comment: Miscellaneous 2. This is an alphanumeric field and there
+    is no practical limit to the length of this field.
+M3:
+  biblatex: null
+  comment: Type of Work
+N1:
+  biblatex: null
+  comment: Notes
+N2:
+  biblatex: abstract
+  comment: Abstract. This is a free text field and can contain alphanumeric
+    characters. There is no practical length limit to this field.
+NV:
+  biblatex: null
+  comment: Number of Volumes
+OP:
+  biblatex: null
+  comment: Original Publication
+PB:
+  biblatex: publisher
+  comment: Publisher
+PP:
+  biblatex: address
+  comment: Publishing Place
+PY:
+  biblatex: year
+  comment: Publication year (YYYY)
+RI:
+  biblatex: null
+  comment: Reviewed Item
+RN:
+  biblatex: null
+  comment: Research Notes
+RP:
+  biblatex: null
+  comment: Reprint Edition
+SE:
+  biblatex: null
+  comment: Section
+SN:
+  biblatex: isbn
+  comment: ISBN/IS
+SP:
+  biblatex: firstpage
+  comment: Start Page
+ST:
+  biblatex: shorttitle
+  comment: Short Title
+T1:
+  biblatex: title
+  comment: Primary Title
+T2:
+  biblatex: null
+  comment: Secondary Title (journal title, if applicable)
+T3:
+  biblatex: null
+  comment: Tertiary Title
+TA:
+  biblatex: null
+  comment: Translated Author
+TI:
+  biblatex: title
+  comment: Title
+TT:
+  biblatex: null
+  comment: Translated Title
+TY:
+  biblatex: null
+  comment: Type of reference (must be the first tag)
+U1:
+  biblatex: null
+  comment: User definable 1. This is an alphanumeric field and there
+    is no practical limit to the length of this field.
+U2:
+  biblatex: null
+  comment: User definable 2. This is an alphanumeric field and there
+    is no practical limit to the length of this field.
+U3:
+  biblatex: null
+  comment: User definable 3. This is an alphanumeric field and there
+    is no practical limit to the length of this field.
+U4:
+  biblatex: null
+  comment: User definable 4. This is an alphanumeric field and there
+    is no practical limit to the length of this field.
+U5:
+  biblatex: null
+  comment: User definable 5. This is an alphanumeric field and there
+    is no practical limit to the length of this field.
+UR:
+  biblatex: url
+  comment: URL
+VL:
+  biblatex: number
+  comment: Volume number
+VO:
+  biblatex: null
+  comment: Published Standard number
+Y1:
+  biblatex: date
+  comment: Primary Date
+Y2:
+  biblatex: urldate
+  comment: Access Date

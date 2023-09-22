@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import re
+import yaml
+
+tagRe = re.compile(r'^\S+')
+
+def processRawFile(inFile, outFile) :
+	risData = {}
+	with open(inFile) as risIn :
+		for aLine in risIn.readlines() :
+			aLine = aLine.rstrip()
+			aTag = tagRe.match(aLine).group(0)
+			aComment = aLine.replace(aTag, '').replace('  ',' ').strip()
+			risData[aTag] = {
+			  'biblatex' : None,
+				'comment' : aComment
+			}
+
+	with open(outFile, 'w') as risOut :
+		risOut.write(yaml.dump(risData, width=65))
+
+processRawFile('risTypes.raw',  'risTypes.yaml')
+processRawFile('risFields.raw', 'risFields.yaml')
