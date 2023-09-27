@@ -21,8 +21,24 @@ def getRisFields() :
     'r', encoding='utf-8'
   ).read()
 
+# check for the RIS-Type line ('TY' two spaces a dash and a space)
+risTypeRegExp = re.compile(r'^\S+\s\s-\s(\S+)')
+
+def getBibLatexType(aRisString) :
+  aMatch = risTypeRegExp.search(aRisString)
+  if not aMatch : return None
+
+  aRisTypeTag = aMatch.group(1).upper()
+  risTypes = yaml.safe_load(getRisTypes())
+  if aRisTypeTag not in risTypes : return None
+
+  biblatexType = risTypes[aRisTypeTag]['biblatex']
+  if not biblatexType : return None
+
+  return biblatexType
+
 risTagRegExp = re.compile(r'^\S+')
-def parseRis(aRisString) :
+def parseRis(aRisString, biblatexType) :
   risFields = yaml.safe_load(getRisFields())
   
   risEntry = {}
@@ -30,6 +46,9 @@ def parseRis(aRisString) :
     if not aLine : continue
     aTag = risTagRegExp.match(aLine).group(0)
     if aTag == 'ER' : continue
+    if aTag == 'TY' :
+      risEntry['entrytype'] = biblatexType
+      continue
     contents = aLine.replace(aTag, '').strip().removeprefix('-').strip()
     if aTag in risFields and risFields[aTag]['biblatex'] :
       aTag = risFields[aTag]['biblatex']

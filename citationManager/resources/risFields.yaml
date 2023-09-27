@@ -3,11 +3,11 @@ A1:
   comment: Primary Authors (each author on its own line preceded by
     the tag)
 A2:
-  biblatex: null
+  biblatex: editor
   comment: Secondary Authors (each author on its own line preceded
     by the tag)
 A3:
-  biblatex: null
+  biblatex: translator
   comment: Tertiary Authors (each author on its own line preceded by
     the tag)
 A4:
@@ -69,7 +69,7 @@ CP:
   comment: This field can contain alphanumeric characters. There is
     no practical limit to the length of this field.
 CT:
-  biblatex: null
+  biblatex: title
   comment: Title of unpublished reference
 CY:
   biblatex: address
@@ -109,7 +109,7 @@ J1:
   comment: 'Periodical name: user abbreviation 1. This is an alphanumeric
     field of up to 255 characters.'
 J2:
-  biblatex: null
+  biblatex: journal
   comment: Alternate Title (this field is used for the abbreviated
     title of a book or journal name, the latter mapped to T2)
 JA:
@@ -217,13 +217,13 @@ T1:
   biblatex: title
   comment: Primary Title
 T2:
-  biblatex: null
+  biblatex: booktitle
   comment: Secondary Title (journal title, if applicable)
 T3:
-  biblatex: null
+  biblatex: seriestitle
   comment: Tertiary Title
 TA:
-  biblatex: null
+  biblatex: translator
   comment: Translated Author
 TI:
   biblatex: title
