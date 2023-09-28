@@ -22,7 +22,7 @@ def getRisFields() :
   ).read()
 
 # check for the RIS-Type line ('TY' two spaces a dash and a space)
-risTypeRegExp = re.compile(r'^\S+\s\s-\s(\S+)')
+risTypeRegExp = re.compile(r'^TY\s\s-\s(\S+)', re.MULTILINE)
 
 def getBibLatexType(aRisString) :
   aMatch = risTypeRegExp.search(aRisString)

@@ -85,11 +85,24 @@ def saveCitation(aCitation) :
 #####################################################################
 # People
 
-def getPossiblePeopleFromSurname(surname, config) :
-  baseDir = Path('.')
-  if 'oldRefs' in config and 'baseDir' in config['oldRefs'] :
-    baseDir = Path(config['oldRefs']['baseDir']).expanduser()
-  authorDir = baseDir / 'author'
+removeStrangeChars      = re.compile(r"[\'\",\.\{\} \t\n\r]+")
+removeMultipleDashes    = re.compile(r"\-+")
+removeLeadingDashes     = re.compile(r"^\-+")
+removeTrailingDashes    = re.compile(r"\-+$")
+removeMultipleSpaces    = re.compile(r"\s+")
+removeSpacesBeforeComma = re.compile(r"\s+\,")
+
+def author2urlBase(authorName) :
+  authorFileName = authorName[:] # (makes a *copy*)
+  authorFileName = removeStrangeChars.sub('-', authorFileName)
+  authorFileName = removeMultipleDashes.sub('-', authorFileName)
+  authorFileName = removeLeadingDashes.sub('', authorFileName)
+  authorFileName = removeTrailingDashes.sub('', authorFileName)
+  #print(f"author/{authorFileName[0:2]}/{authorFileName}")
+  return f"author/{authorFileName[0:2]}/{authorFileName}"
+
+def getPossiblePeopleFromSurname(surname) : 
+  authorDir = Path('author')
   possibleAuthors = []
   for anAuthor in authorDir.glob(f'*/*{surname}*') :
     anAuthor = str(anAuthor.name).removesuffix('.md')
@@ -97,9 +110,6 @@ def getPossiblePeopleFromSurname(surname, config) :
   possibleAuthors.append("new")
   possibleAuthors.sort()
   return possibleAuthors
-
-removeMultipleSpaces    = re.compile(r"\s+")
-removeSpacesBeforeComma = re.compile(r"\s+\,")
 
 def normalizeAuthor(anAuthor) :
   authorDict = {
@@ -137,5 +147,39 @@ def normalizeAuthor(anAuthor) :
     authorDict['jr']        = jrPart
   return authorDict
 
-def saveAuthor(anAuthorDict) :
-  pass
+def authorPathExists(anAuthorDict) :
+  return Path(author2urlBase(anAuthorDict['cleanname']) + '.md').exists()
+
+def savedAuthorToFile(anAuthorDict) :
+  if not isinstance(anAuthorDict, dict) : return False
+  if 'cleanname' not in anAuthorDict    : return False
+  
+  authorPath = Path(author2urlBase(anAuthorDict['cleanname']) + '.md')
+
+  if not authorPath.exists() :
+    authorPath.parent.mkdir(parents=True, exist_ok=True)
+
+  with open(authorPath, 'w') as authorFile :
+    authorFile.write(f"""---
+title: {anAuthorDict['cleanname']}
+biblatex:
+  cleanname: {anAuthorDict['cleanname']}
+  von: {anAuthorDict['von']}
+  surname: {anAuthorDict['surname']}
+  jr: {anAuthorDict['jr']}
+  firstname: {anAuthorDict['firstname']}
+  email: {anAuthorDict['email']}
+  institute: {anAuthorDict['institute']}
+""")
+    if anAuthorDict['url'] :
+      if isinstance(anAuthorDict['url'], str) :
+        authorFile.write(f"  url: {anAuthorDict['url']}\n")
+      else :
+        authorFile.write("  url:\n")
+        for aUrl in anAuthorDict['url'] :
+          authorFile.write(f"    - {aUrl}\n")
+    else :
+      authorFile.write("  url: []\n")
+    authorFile.write("---\n\n")
+
+  return True
