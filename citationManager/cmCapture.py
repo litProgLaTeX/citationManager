@@ -11,7 +11,11 @@ import yaml
 from citationManager.risTools import \
   parseRis, getRisTypes, getBibLatexType
 from citationManager.biblatexTools import \
-  normalizeBiblatex, normalizeAuthor, \
+  normalizeBiblatex, \
+  getPossibleCitations, \
+  citationPathExists, savedCitation, \
+  normalizeAuthor, \
+  makePersonRole, getPersonRole, \
   getPossiblePeopleFromSurname, \
   authorPathExists, savedAuthorToFile
 
@@ -33,6 +37,25 @@ def setupRisTypes() :
   ).props('readonly outlined rows=25').classes('w-full')
 
 ##########################################################################
+# utilities
+
+async def overwriteDialog(aMsg) :
+  with ui.dialog() as theDialog, ui.card():
+    ui.label(aMsg)
+    with ui.row():
+      ui.button(
+         'No',
+        color='green',
+        on_click=lambda:  theDialog.submit(False)
+      )
+      ui.button(
+        'Yes',
+        color='red',
+        on_click=lambda: theDialog.submit(True)
+      )
+  return await theDialog
+
+##########################################################################
 # update interface 
 
 class CmCapture :
@@ -47,8 +70,11 @@ class CmCapture :
   biblatexEntryChanged  = False
   notesTextArea         = None
   notesChanged          = False
-  citeIdInput           = None
-  citeIdChanged         = False
+  citeIdSelector        = None
+  selectedCiteId        = None
+  selectedCiteIdChanged = False
+  otherCiteIdInput      = None
+  otherCiteIdChanged    = False
   pdfUrlInput           = None
   pdfUrlChanged         = False
   pdfTypeInput          = None
@@ -68,78 +94,81 @@ def clearReference() :
   cmc.biblatexEntryChanged        = False
   cmc.notesTextArea.value         = ""
   cmc.notesChanged                = False
-  cmc.citeIdInput.value           = ""
-  cmc.citeIdChanged               = False
+  cmc.citeIdSelector.set_options(['other'], value='other')
+  cmc.selectedCiteId              = 'other'
+  cmc.selectedCiteIdChanged       = False
+  cmc.otherCiteIdInput.value      = ""
+  cmc.otherCiteIdChanged          = False
   cmc.pdfUrlInput.value           = ""
   cmc.pdfUrlChanged               = False
-  cmc.pdfTypeInput.value          = ""
+  cmc.pdfTypeInput.value          = "public"
   cmc.pdfTypeChanged              = False
   tabs.set_value('risEntry')
 
-def setPeopleSelector(aPerson, sel) :
-  print(f"setting selectedPeople[{aPerson}] = {sel.value}")
-  cmc.selectedPeople[aPerson] = sel.value
+def setPeopleSelector(aPersonRole, sel) :
+  cmc.selectedPeople[aPersonRole] = sel.value
+
+def setPersonToAdd(aPersonRole) :
+  aPersonName, _ = getPersonRole(aPersonRole)
+  cmc.peopleToAddTextArea.value = yaml.dump(
+    normalizeAuthor(aPersonName),
+    allow_unicode=True
+  )
 
 def updateReference() :
-  print("=======================================")
   aRisString = cmc.risEntryTextArea.value
   biblatexType = getBibLatexType(aRisString)
   risEntry = parseRis(aRisString, biblatexType)
-  people, biblatexEntry, citeId = normalizeBiblatex(risEntry)
+  peopleRoles, biblatexEntry, citeId = normalizeBiblatex(risEntry)
 
-  if cmc.confirmPeopleScroll and people :
-    #cmc.confirmPeopleScroll.clear()
+  if cmc.confirmPeopleScroll and peopleRoles :
     with cmc.confirmPeopleScroll :
-      for aPersonType in people :
-        for aPerson in people[aPersonType] :
-          print(aPerson)
-          posPeople = ['new']
-          surname = aPerson.split(',')
-          if surname :
-            posPeople = getPossiblePeopleFromSurname(surname[0]) #, config)
+      for aPersonRole in peopleRoles :
+        aName, aRole = getPersonRole(aPersonRole)
+        posPeople = ['new']
+        surname = aName.split(',')
+        if surname :
+          posPeople = getPossiblePeopleFromSurname(surname[0]) #, config)
 
-          print(yaml.dump(posPeople))
-          if aPerson in cmc.peopleSelectors : 
-            if aPerson not in cmc.selectedPeople \
-              or cmc.selectedPeople[aPerson] == 'new' :
-              print(f"resetting selectedPeople[{aPerson}] = {posPeople[0]}")
-              cmc.selectedPeople[aPerson] = posPeople[0]
-            print("----------------")
-            print(yaml.dump(cmc.selectedPeople))
-            cmc.peopleSelectors[aPerson].set_options(
-              posPeople,
-              value=cmc.selectedPeople[aPerson]
-            )
-          else :
-            ui.markdown(f"**{aPersonType}**: {aPerson}")
-            cmc.peopleSelectors[aPerson] = ui.select(
-              posPeople,
-              value=posPeople[0],
-              on_change=lambda sel, aPerson=aPerson : setPeopleSelector(aPerson, sel)
-            ).props("outlined")
+        if aPersonRole in cmc.peopleSelectors : 
+          if aPersonRole not in cmc.selectedPeople :
+            cmc.selectedPeople[aPersonRole] = posPeople[0]
+          cmc.peopleSelectors[aPersonRole].set_options(
+            posPeople,
+            value=cmc.selectedPeople[aPersonRole]
+          )
+        else :
+          ui.markdown(f"**{aRole}**: {aName}")
+          cmc.peopleSelectors[aPersonRole] = ui.select(
+            posPeople,
+            value=posPeople[0],
+            on_change= \
+              lambda sel, aPersonRole=aPersonRole : \
+                setPeopleSelector(aPersonRole, sel)
+          ).props("outlined")
   
   cmc.peopleToAddList = []
-  if people :
-    for aPerson, aSelector in cmc.peopleSelectors.items() :
+  if peopleRoles :
+    for aPersonRole, aSelector in cmc.peopleSelectors.items() :
       if aSelector.value == 'new' :
-        cmc.peopleToAddList.append(aPerson)
+        cmc.peopleToAddList.append(str(aPersonRole))
   if 0 < len(cmc.peopleToAddList) :
     cmc.peopleToAddSelector.set_options(
       cmc.peopleToAddList, value=cmc.peopleToAddList[0]
     )
-    cmc.peopleToAddTextArea.value = yaml.dump(
-      normalizeAuthor(
-        cmc.peopleToAddSelector.value
-      ),
-      allow_unicode=True
-    )
+    setPersonToAdd(cmc.peopleToAddSelector.value)
 
   if cmc.biblatexEntryTextArea and biblatexEntry and not cmc.biblatexEntryChanged :
     cmc.biblatexEntryTextArea.value = yaml.dump(biblatexEntry, allow_unicode=True)
 
-  if cmc.citeIdInput and citeId and not cmc.citeIdChanged :
-    cmc.citeIdInput.value = citeId
-    #cmc.citeIdChanged = True
+  selectedCiteId = 'other'
+  cmc.citeIdSelector.set_options(
+    getPossibleCitations(citeId),
+    value=selectedCiteId
+  )
+
+  if cmc.otherCiteIdInput and citeId and not cmc.otherCiteIdChanged :
+    cmc.otherCiteIdInput.value = citeId
 
   if cmc.pdfUrlInput and 'url' in biblatexEntry and not cmc.pdfUrlChanged :
       if 0 < len(biblatexEntry['url']) :
@@ -228,21 +257,9 @@ async def savePerson() :
     return
   
   if authorPathExists(aPersonDict) :
-    with ui.dialog() as overwriteDialog, ui.card():
-      ui.label('The author already exists, do you want to overwrite this author?')
-      with ui.row():
-        ui.button(
-          'Yes',
-          color='green',
-          on_click=lambda: overwriteDialog.submit(True)
-        )
-        ui.button(
-          'No',
-          color='red',
-          on_click=lambda:  overwriteDialog.submit(False)
-        )
-
-    if not await overwriteDialog : 
+    if not await overwriteDialog(
+      f"The author {aPersonDict['cleanname']} already exists, do you want to overwrite this author?"
+    ) : 
       tabs.set_value('confirmPeople')
       return
     ui.notify(f'Overwriting author')
@@ -254,7 +271,9 @@ async def savePerson() :
 
 def setupAddPeople() :
   cmc.peopleToAddSelector = ui.select(
-    ['choose author'], value='choose author'
+    ['choose author'],
+    value='choose author',
+    on_change=lambda sel : setPersonToAdd(sel.value)
   )
   cmc.peopleToAddTextArea = ui.textarea(
     label='Add new author',
@@ -320,30 +339,68 @@ def setupNotes() :
       on_click=lambda: clearReference()
     )
 
-def saveReference() :
-  pass
+def CheckForDuplicateCitations() :
+  posCitations = getPossibleCitations(cmc.otherCiteIdInput.value)
+  cmc.citeIdSelector.set_options(
+    posCitations,
+    value=posCitations[0]
+  )
 
-def setCiteIdChanged() :
-  if cmc.citeIdInput.value :
-    cmc.citeIdChanged = True
+async def saveReference() :
+  theCiteId = cmc.otherCiteIdInput.value
+  if cmc.selectedCiteId != 'other' :
+    theCiteId = cmc.selectedCiteId
+  if citationPathExists(theCiteId) :
+    if not await overwriteDialog(
+      f'The citation [{theCiteId}] already exists,\n  do you really want to overwrite this citation?'
+    ) : 
+      #tabs.set_value('confirmPeople')
+      return
+    ui.notify(f'Overwriting citation')
+
+  theCitation = {}
+  try : 
+    theCitation = yaml.safe_load(
+      cmc.biblatexEntryTextArea.value
+    )
+  except Exception as err :
+    ui.notify(f"Could not parse the biblatex YAML\n{repr(err)}")
+    return
+  somePeople = sorted(list(cmc.peopleSelectors.keys()))
+  if savedCitation(
+    theCiteId,
+    theCitation,
+    somePeople
+  ) :
+    ui.notify("Citation saved")
+
+def setSelectedCiteId(sel) :
+  cmc.selectedCiteId = sel.value
+  cmc.selectedCiteIdChanged = True
+def setOtherCiteIdChanged() :
+  if cmc.otherCiteIdInput.value :
+    cmc.otherCiteIdChanged = True
   else : # has been cleared!
-    cmc.citeIdChanged = False
+    cmc.otherCiteIdChanged = False
 def setPdfUrlChanged() :
   if cmc.pdfUrlInput.value :
     cmc.pdfUrlChanged = True
   else : # has been cleared!
     cmc.pdfUrlChanged = False
 def setPdfTypeChanged() :
-  if cmc.pdfTypeInput.value :
-    cmc.pdfTypeChanged = True
-  else : # has been cleared!
-    cmc.pdfTypeChanged = False
+  cmc.pdfTypeChanged = True
 
 def setupSaveRef() :
-  cmc.citeIdInput = ui.input(
-    label='Citation ID',
-    placeholder='Update citation id here...',
-    on_change=lambda : setCiteIdChanged()
+  cmc.citeIdSelector = ui.select(
+    ['other'],
+    value='other',
+    on_change=lambda sel : setSelectedCiteId(sel)
+  ).props('outlined')
+  cmc.selectedCiteId = 'other'
+  cmc.otherCiteIdInput = ui.input(
+    label='Other citation ID',
+    placeholder='Update other citation id here...',
+    on_change=lambda : setOtherCiteIdChanged()
   ).props("clearable outlined").classes('w-full')
   cmc.pdfUrlInput = ui.input(
     label='PDF url',
@@ -354,8 +411,12 @@ def setupSaveRef() :
     'owned', 'public', 'unknown',
   ], value='public',
     on_change=lambda : setPdfTypeChanged()
-  )
+  ).props('outlined')
   with ui.row() :
+    ui.button(
+      'Recheck for duplicates',
+      on_click=lambda: CheckForDuplicateCitations()
+    )
     ui.button(
       'Save reference',
       color='green',

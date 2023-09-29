@@ -35,54 +35,6 @@ def toCamelCase(text):
     return s[0] + ''.join(i.capitalize() for i in s[1:])
 
 #####################################################################
-# Citations
-
-def getAPerson(risEntry, aPersonType) :
-  somePeople = []
-  if aPersonType in risEntry :
-    somePeople = risEntry[aPersonType]
-    if isinstance(somePeople, str) :
-      somePeople = [ somePeople ]
-    del risEntry[aPersonType]
-  return somePeople
-
-def normalizeBiblatex(risEntry) :
-  biblatexType = risEntry['entrytype']
-  people = {
-    'author'     : [],
-    'editor'     : [],
-    'translator' : []
-  }
-  people['author']     = getAPerson(risEntry, 'author')
-  people['editor']     = getAPerson(risEntry, 'editor')
-  people['translator'] = getAPerson(risEntry, 'translator')
-
-  biblatexTypes = yaml.safe_load(getBibLatexTypes())
-  biblatexEntry = risEntry
-  if biblatexType in biblatexTypes :
-    reqBiblatexFields = biblatexTypes[biblatexType]['requiredFields']
-    for aField in reqBiblatexFields :
-      if aField not in biblatexEntry : biblatexEntry[aField] = ''
-
-  citeId = ''
-  for anAuthor in people['author'] :
-    surname = anAuthor.split(',')
-    if surname :
-      citeId = citeId+surname[0]
-  if 'year' in risEntry :
-    citeId = citeId+str(risEntry['year'])
-  if 'shorttitle' in risEntry :
-    lastPart = toCamelCase(risEntry['shorttitle'].strip())
-    lastPart = lowerCaseFirstCharacter(lastPart)
-    citeId = citeId+lastPart
-  citeId = lowerCaseFirstCharacter(citeId)
-
-  return (people, biblatexEntry, citeId)
-
-def saveCitation(aCitation) :
-  pass
-
-#####################################################################
 # People
 
 removeStrangeChars      = re.compile(r"[\'\",\.\{\} \t\n\r]+")
@@ -111,7 +63,20 @@ def getPossiblePeopleFromSurname(surname) :
   possibleAuthors.sort()
   return possibleAuthors
 
-def normalizeAuthor(anAuthor) :
+def makePersonRole(anAuthor, aRole) :
+  return f"{aRole}:{anAuthor}"
+
+def getPersonRole(anAuthorRole) :
+  aRole = 'unknown'
+  anAuthor = anAuthorRole
+  if -1 < anAuthorRole.find(':') :
+    theParts = anAuthorRole.split(':')
+    aRole = theParts[0].strip()
+    anAuthor = theParts[1].strip()
+  return (anAuthor, aRole)
+
+def normalizeAuthor(anAuthorRole) :
+  anAuthor, aRole = getPersonRole(anAuthorRole)
   authorDict = {
     'cleanname' : anAuthor,
     'surname'   : '',
@@ -183,3 +148,83 @@ biblatex:
     authorFile.write("---\n\n")
 
   return True
+
+#####################################################################
+# Citations
+
+removeLeadingDigitsWhiteSpace = re.compile(r"^[0-9]+[ \t]+")
+
+def citation2refUrl(citeKey) :
+  citeKeyLocal = removeLeadingDigitsWhiteSpace.sub('', citeKey)
+  return f"{citeKeyLocal[0:2]}/{citeKeyLocal}"
+
+def citation2urlBase(citeKey) :
+  citeKeyLocal = removeLeadingDigitsWhiteSpace.sub('', citeKey)
+  return "cite/" + citation2refUrl(citeKey)
+
+def getPossibleCitations(citeKey) :
+  possibleCitations = set()
+  possibleCitations.add(citeKey)
+  for aCitation in Path("cite").glob(f"*/*{citeKey[0:5]}*") :
+    aCitation = str(aCitation.name).removesuffix('.md')
+    possibleCitations.add(aCitation)
+  possibleCitations = sorted(list(possibleCitations))
+  possibleCitations.append("other")
+  return possibleCitations
+
+def getSomePeople(risEntry, aPersonRole) :
+  somePeople = []
+  if aPersonRole in risEntry :
+    somePeople = risEntry[aPersonRole]
+    if isinstance(somePeople, str) :
+      somePeople = [ somePeople ]
+    del risEntry[aPersonRole]
+  somePeopleRoles = []
+  for aPersonName in somePeople :
+    somePeopleRoles.append(makePersonRole(aPersonName, aPersonRole))
+  return somePeopleRoles
+
+def normalizeBiblatex(risEntry) :
+  biblatexType = risEntry['entrytype']
+  peopleRoles = []
+  peopleRoles.extend(getSomePeople(risEntry, 'author'))
+  peopleRoles.extend(getSomePeople(risEntry, 'editor'))
+  peopleRoles.extend(getSomePeople(risEntry, 'translator'))
+
+  biblatexTypes = yaml.safe_load(getBibLatexTypes())
+  biblatexEntry = risEntry
+  if biblatexType in biblatexTypes :
+    reqBiblatexFields = biblatexTypes[biblatexType]['requiredFields']
+    for aField in reqBiblatexFields :
+      if aField not in biblatexEntry : biblatexEntry[aField] = ''
+
+  citeId = ''
+  for aPersonRole in peopleRoles :
+    aPerson, aRole = getPersonRole(aPersonRole)
+    if aRole != 'author' : continue
+    surname = aPerson.split(',')
+    if surname :
+      citeId = citeId+surname[0]
+  if 'year' in risEntry :
+    citeId = citeId+str(risEntry['year'])
+  if 'shorttitle' in risEntry :
+    lastPart = toCamelCase(risEntry['shorttitle'].strip())
+    lastPart = lowerCaseFirstCharacter(lastPart)
+    citeId = citeId+lastPart
+  citeId = lowerCaseFirstCharacter(citeId)
+
+  return (peopleRoles, biblatexEntry, citeId)
+
+def citationPathExists(aCiteId) :
+  return Path(citation2urlBase(aCiteId) + '.md').exists()
+
+def savedCitation(aCiteId, aCitation, somePeople) :
+  print("saving citation")
+  print("----------------------------------")
+  print(aCiteId)
+  print("----------------------------------")
+  print(yaml.dump(aCitation))
+  print("----------------------------------")
+  print(yaml.dump(somePeople))
+  print("----------------------------------")
+  return False
