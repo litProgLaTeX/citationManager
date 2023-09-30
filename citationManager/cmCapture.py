@@ -65,6 +65,7 @@ class CmCapture :
   peopleToAddList       = None
   peopleToAddSelector   = None
   peopleToAddTextArea   = None
+  peopleNotesTextArea   = None
   risEntryTextArea      = None
   biblatexEntryTextArea = None
   biblatexEntryChanged  = False
@@ -75,8 +76,7 @@ class CmCapture :
   selectedCiteIdChanged = False
   otherCiteIdInput      = None
   otherCiteIdChanged    = False
-  pdfUrlInput           = None
-  pdfUrlChanged         = False
+  pdfUrlSelector        = None
   pdfTypeInput          = None
   pdfTypeChanged        = False
 
@@ -87,20 +87,26 @@ def clearReference() :
   cmc.peopleSelectors = {}
   cmc.selectedPeople  = {}
   cmc.peopleToAddList = None
-  cmc.peopleToAddSelector.set_options(["new"], value="new")
+  cmc.peopleToAddSelector.set_options(
+    ["new"], value="new"
+  )
   cmc.peopleToAddTextArea.value   = ""
+  cmc.peopleNotesTextArea.value   = ""
   cmc.risEntryTextArea.value      = ""
   cmc.biblatexEntryTextArea.value = ""
   cmc.biblatexEntryChanged        = False
   cmc.notesTextArea.value         = ""
   cmc.notesChanged                = False
-  cmc.citeIdSelector.set_options(['other'], value='other')
+  cmc.citeIdSelector.set_options(
+    ['other'], value='other'
+  )
   cmc.selectedCiteId              = 'other'
   cmc.selectedCiteIdChanged       = False
   cmc.otherCiteIdInput.value      = ""
   cmc.otherCiteIdChanged          = False
-  cmc.pdfUrlInput.value           = ""
-  cmc.pdfUrlChanged               = False
+  cmc.pdfUrlSelector.set_options(
+    ["don't download"], value="don't download"
+  )
   cmc.pdfTypeInput.value          = "public"
   cmc.pdfTypeChanged              = False
   tabs.set_value('risEntry')
@@ -114,6 +120,7 @@ def setPersonToAdd(aPersonRole) :
     normalizeAuthor(aPersonName),
     allow_unicode=True
   )
+  cmc.peopleNotesTextArea.value = ""
 
 def updateReference() :
   aRisString = cmc.risEntryTextArea.value
@@ -170,10 +177,12 @@ def updateReference() :
   if cmc.otherCiteIdInput and citeId and not cmc.otherCiteIdChanged :
     cmc.otherCiteIdInput.value = citeId
 
-  if cmc.pdfUrlInput and 'url' in biblatexEntry and not cmc.pdfUrlChanged :
+  if cmc.pdfUrlSelector and 'url' in biblatexEntry :
       if 0 < len(biblatexEntry['url']) :
-        cmc.pdfUrlInput.value = biblatexEntry['url'][0]
-        #cmc.pdfUrlChanged = True
+        cmc.pdfUrlSelector.set_options(
+          biblatexEntry['url'],
+          value = biblatexEntry['url'][0]
+        )
 
 ##########################################################################
 # setup progression through tabs
@@ -264,7 +273,7 @@ async def savePerson() :
       return
     ui.notify(f'Overwriting author')
 
-  if savedAuthorToFile(aPersonDict) : 
+  if savedAuthorToFile(aPersonDict, cmc.peopleNotesTextArea.value) : 
     ui.notify("Author saved")
     updateReference()
   tabs.set_value('confirmPeople')
@@ -273,12 +282,17 @@ def setupAddPeople() :
   cmc.peopleToAddSelector = ui.select(
     ['choose author'],
     value='choose author',
+    label='Author to edit',
     on_change=lambda sel : setPersonToAdd(sel.value)
   )
   cmc.peopleToAddTextArea = ui.textarea(
     label='Add new author',
     placeholder='Add new author details here...'
-  ).props("clearable outlined rows=25").classes('w-full')
+  ).props("clearable outlined rows=10").classes('w-full')
+  cmc.peopleNotesTextArea = ui.textarea(
+    label='Notes',
+    placeholder='Add any author notes here...'
+  ).props("clearable outlined rows=15").classes('w-full')
   with ui.row() :
     ui.button(
      'Save person',
@@ -346,6 +360,12 @@ def CheckForDuplicateCitations() :
     value=posCitations[0]
   )
 
+def downloadPdf() :
+  if cmc.pdfUrlSelector.value.endswith('download') :
+    ui.notify("Nothing do download")
+    return
+  ui.download(cmc.pdfUrlSelector.value)
+
 async def saveReference() :
   theCiteId = cmc.otherCiteIdInput.value
   if cmc.selectedCiteId != 'other' :
@@ -370,7 +390,9 @@ async def saveReference() :
   if savedCitation(
     theCiteId,
     theCitation,
-    somePeople
+    somePeople,
+    cmc.notesTextArea.value,
+    cmc.pdfTypeInput.value
   ) :
     ui.notify("Citation saved")
 
@@ -382,11 +404,6 @@ def setOtherCiteIdChanged() :
     cmc.otherCiteIdChanged = True
   else : # has been cleared!
     cmc.otherCiteIdChanged = False
-def setPdfUrlChanged() :
-  if cmc.pdfUrlInput.value :
-    cmc.pdfUrlChanged = True
-  else : # has been cleared!
-    cmc.pdfUrlChanged = False
 def setPdfTypeChanged() :
   cmc.pdfTypeChanged = True
 
@@ -394,6 +411,7 @@ def setupSaveRef() :
   cmc.citeIdSelector = ui.select(
     ['other'],
     value='other',
+    label='Citation ID',
     on_change=lambda sel : setSelectedCiteId(sel)
   ).props('outlined')
   cmc.selectedCiteId = 'other'
@@ -402,20 +420,26 @@ def setupSaveRef() :
     placeholder='Update other citation id here...',
     on_change=lambda : setOtherCiteIdChanged()
   ).props("clearable outlined").classes('w-full')
-  cmc.pdfUrlInput = ui.input(
+  cmc.pdfUrlSelector = ui.select(
+    ["don't download"],
+    value="don't download",
     label='PDF url',
-    placeholder='Add a valid url for the PDF',
-    on_change=lambda : setPdfUrlChanged()
   ).props("clearable outlined").classes('w-full')
   cmc.pdfTypeInput = ui.select([
     'owned', 'public', 'unknown',
   ], value='public',
+    label='PDF type',
     on_change=lambda : setPdfTypeChanged()
   ).props('outlined')
   with ui.row() :
     ui.button(
       'Recheck for duplicates',
       on_click=lambda: CheckForDuplicateCitations()
+    )
+    ui.button(
+      'Download PDF',
+      color='green',
+      on_click=lambda: downloadPdf()
     )
     ui.button(
       'Save reference',

@@ -115,7 +115,7 @@ def normalizeAuthor(anAuthorRole) :
 def authorPathExists(anAuthorDict) :
   return Path(author2urlBase(anAuthorDict['cleanname']) + '.md').exists()
 
-def savedAuthorToFile(anAuthorDict) :
+def savedAuthorToFile(anAuthorDict, theNotes) :
   if not isinstance(anAuthorDict, dict) : return False
   if 'cleanname' not in anAuthorDict    : return False
   
@@ -146,7 +146,9 @@ biblatex:
     else :
       authorFile.write("  url: []\n")
     authorFile.write("---\n\n")
-
+    if theNotes :
+      authorFile.write(theNotes)
+      authorFile.write("\n")
   return True
 
 #####################################################################
@@ -218,13 +220,68 @@ def normalizeBiblatex(risEntry) :
 def citationPathExists(aCiteId) :
   return Path(citation2urlBase(aCiteId) + '.md').exists()
 
-def savedCitation(aCiteId, aCitation, somePeople) :
-  print("saving citation")
-  print("----------------------------------")
-  print(aCiteId)
-  print("----------------------------------")
-  print(yaml.dump(aCitation))
-  print("----------------------------------")
-  print(yaml.dump(somePeople))
-  print("----------------------------------")
-  return False
+def savedCitation(aCiteId, aCitationDict, somePeople, theNotes, pdfType) :
+  if not isinstance(aCitationDict, dict) :
+    return False
+
+  # normalize the citation biblatex
+  #
+  aCitationDict['citekey'] = aCiteId
+  aCitationDict['docType'] = pdfType
+
+  if 'year-date' in aCitationDict :
+    yearDate = aCitationDict['year-date']
+    del aCitationDict['year-date']
+    if yearDate :
+      if -1 < yearDate.find('-') :
+        if 'date' not in aCitationDict :
+          aCitationDict['date'] = yearDate
+        if 'year' not in aCitationDict :
+          aCitationDict['year'] = yearDate.split('-')
+      else :
+        if 'year' not in aCitationDict :
+          aCitationDict['year'] = yearDate
+
+  # make sure the citation path exists
+  #
+  citePath = Path(citation2urlBase(aCiteId) + '.md')
+  if not citePath.exists() :
+    citePath.parent.mkdir(parents=True, exist_ok=True)
+
+  # write out the citation
+  #
+  with open(citePath, 'w') as citeFile :
+    citeFile.write(f"""---
+title: "{aCitationDict['title']}"
+biblatex:
+""")
+    thePeople = {}
+    for aPersonRole in somePeople :
+      aPerson, aRole = getPersonRole(aPersonRole)
+      if aRole not in thePeople :
+        thePeople[aRole] = []
+      thePeople[aRole].append(aPerson)
+    for aRole, someNames in thePeople.items() :
+      if aRole in aCitationDict : 
+        del aCitationDict[aRole]
+      citeFile.write(f"  {aRole}: \n")
+      for aName in someNames :
+        citeFile.write(f"    - {aName}\n")
+    for aField, aValue in aCitationDict.items() :
+      citeFile.write(f"  {aField}: ")
+      if isinstance(aValue, list) :
+        citeFile.write("\n")
+        for aSingleValue in aValue :
+          citeFile.write(f"    - {aSingleValue}\n")
+      else :
+        if -1 < aField.find('title') or -1 < aValue.find(':'):
+          citeFile.write(f'"{aValue}"\n')
+        else :
+          citeFile.write(f"{aValue}\n")
+    citeFile.write("---\n\n")
+    if theNotes :
+      citeFile.write(theNotes)
+      citeFile.write("\n")
+
+  return True
+  
