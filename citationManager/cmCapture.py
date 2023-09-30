@@ -14,7 +14,7 @@ from citationManager.biblatexTools import \
   normalizeBiblatex, \
   getPossibleCitations, \
   citationPathExists, savedCitation, \
-  normalizeAuthor, \
+  citation2urlBase, normalizeAuthor, \
   makePersonRole, getPersonRole, \
   getPossiblePeopleFromSurname, \
   authorPathExists, savedAuthorToFile
@@ -55,6 +55,13 @@ async def overwriteDialog(aMsg) :
       )
   return await theDialog
 
+def setCitePath(aCiteId) :
+  if cmc.citePath :
+    theCitePath = ""
+    if aCiteId :
+      theCitePath = citation2urlBase(aCiteId)
+    cmc.citePath.value = theCitePath
+
 ##########################################################################
 # update interface 
 
@@ -76,6 +83,7 @@ class CmCapture :
   selectedCiteIdChanged = False
   otherCiteIdInput      = None
   otherCiteIdChanged    = False
+  citePath              = None
   pdfUrlSelector        = None
   pdfTypeInput          = None
   pdfTypeChanged        = False
@@ -104,6 +112,7 @@ def clearReference() :
   cmc.selectedCiteIdChanged       = False
   cmc.otherCiteIdInput.value      = ""
   cmc.otherCiteIdChanged          = False
+  cmc.citePath.value              = setCitePath("")
   cmc.pdfUrlSelector.set_options(
     ["don't download"], value="don't download"
   )
@@ -176,6 +185,8 @@ def updateReference() :
 
   if cmc.otherCiteIdInput and citeId and not cmc.otherCiteIdChanged :
     cmc.otherCiteIdInput.value = citeId
+
+  setCitePath(citeId)
 
   if cmc.pdfUrlSelector and 'url' in biblatexEntry :
       if 0 < len(biblatexEntry['url']) :
@@ -398,12 +409,19 @@ async def saveReference() :
 
 def setSelectedCiteId(sel) :
   cmc.selectedCiteId = sel.value
+  if sel.value == "other" :
+    setCitePath(cmc.otherCiteIdInput.value)
+  else :
+    setCitePath(sel.value)
   cmc.selectedCiteIdChanged = True
+
 def setOtherCiteIdChanged() :
   if cmc.otherCiteIdInput.value :
+    setCitePath(cmc.otherCiteIdInput.value)
     cmc.otherCiteIdChanged = True
   else : # has been cleared!
     cmc.otherCiteIdChanged = False
+
 def setPdfTypeChanged() :
   cmc.pdfTypeChanged = True
 
@@ -420,6 +438,9 @@ def setupSaveRef() :
     placeholder='Update other citation id here...',
     on_change=lambda : setOtherCiteIdChanged()
   ).props("clearable outlined").classes('w-full')
+  cmc.citePath = ui.input(
+    label="Citation path:",
+    ).props("readonly outlined").classes('w-full')
   cmc.pdfUrlSelector = ui.select(
     ["don't download"],
     value="don't download",

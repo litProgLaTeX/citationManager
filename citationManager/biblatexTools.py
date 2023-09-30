@@ -2,6 +2,7 @@
 import importlib.resources
 from pathlib import Path
 import re
+import textwrap
 import yaml
 
 #####################################################################
@@ -224,11 +225,11 @@ def savedCitation(aCiteId, aCitationDict, somePeople, theNotes, pdfType) :
   if not isinstance(aCitationDict, dict) :
     return False
 
+  if 'title' not in aCitationDict :
+    return False
+
   # normalize the citation biblatex
   #
-  aCitationDict['citekey'] = aCiteId
-  aCitationDict['docType'] = pdfType
-
   if 'year-date' in aCitationDict :
     yearDate = aCitationDict['year-date']
     del aCitationDict['year-date']
@@ -255,6 +256,21 @@ def savedCitation(aCiteId, aCitationDict, somePeople, theNotes, pdfType) :
 title: "{aCitationDict['title']}"
 biblatex:
 """)
+    citeFile.write(f"  title: \"{aCitationDict['title']}\"\n")
+    del aCitationDict['title']
+    citeFile.write(f"  citekey: {aCiteId}\n")
+    citeFile.write(f"  citePath: {citation2urlBase(aCiteId)}.md\n")
+    citeFile.write(f"  docType: {pdfType}\n")
+    citeFile.write(f"  docPath: {pdfType}/{citation2refUrl(aCiteId)}.pdf\n")
+    if 'abstract' in aCitationDict :
+      citeFile.write(f"  abstract: >\n")
+      theLines = textwrap.wrap(
+        aCitationDict['abstract'],
+        width=70, break_long_words=False,
+        expand_tabs=True)
+      for aLine in theLines :
+        citeFile.write(f"    {aLine}\n")
+      del aCitationDict['abstract']
     thePeople = {}
     for aPersonRole in somePeople :
       aPerson, aRole = getPersonRole(aPersonRole)
@@ -267,7 +283,9 @@ biblatex:
       citeFile.write(f"  {aRole}: \n")
       for aName in someNames :
         citeFile.write(f"    - {aName}\n")
-    for aField, aValue in aCitationDict.items() :
+    theCiteKeys = sorted(list(aCitationDict.keys()))
+    for aField in theCiteKeys :
+      aValue = aCitationDict[aField]
       citeFile.write(f"  {aField}: ")
       if isinstance(aValue, list) :
         citeFile.write("\n")
