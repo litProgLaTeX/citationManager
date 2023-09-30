@@ -14,7 +14,8 @@ from citationManager.biblatexTools import \
   normalizeBiblatex, \
   getPossibleCitations, \
   citationPathExists, savedCitation, \
-  citation2urlBase, normalizeAuthor, \
+  citation2urlBase, citation2refUrl, \
+  normalizeAuthor, \
   makePersonRole, getPersonRole, \
   getPossiblePeopleFromSurname, \
   authorPathExists, savedAuthorToFile
@@ -62,6 +63,13 @@ def setCitePath(aCiteId) :
       theCitePath = citation2urlBase(aCiteId)
     cmc.citePath.value = theCitePath
 
+def setPdfPath(aCiteId) :
+  if cmc.pdfPath :
+    thePdfPath = ""
+    if aCiteId :
+      thePdfPath = cmc.pdfTypeInput.value + '/' + citation2refUrl(aCiteId)
+    cmc.pdfPath.value = thePdfPath
+
 ##########################################################################
 # update interface 
 
@@ -87,6 +95,7 @@ class CmCapture :
   pdfUrlSelector        = None
   pdfTypeInput          = None
   pdfTypeChanged        = False
+  pdfPath               = None
 
 cmc = CmCapture()
 
@@ -112,12 +121,15 @@ def clearReference() :
   cmc.selectedCiteIdChanged       = False
   cmc.otherCiteIdInput.value      = ""
   cmc.otherCiteIdChanged          = False
-  cmc.citePath.value              = setCitePath("")
   cmc.pdfUrlSelector.set_options(
     ["don't download"], value="don't download"
   )
   cmc.pdfTypeInput.value          = "public"
   cmc.pdfTypeChanged              = False
+
+  setCitePath("")
+  setPdfPath("")
+
   tabs.set_value('risEntry')
 
 def setPeopleSelector(aPersonRole, sel) :
@@ -187,6 +199,7 @@ def updateReference() :
     cmc.otherCiteIdInput.value = citeId
 
   setCitePath(citeId)
+  setPdfPath(citeId)
 
   if cmc.pdfUrlSelector and 'url' in biblatexEntry :
       if 0 < len(biblatexEntry['url']) :
@@ -411,18 +424,27 @@ def setSelectedCiteId(sel) :
   cmc.selectedCiteId = sel.value
   if sel.value == "other" :
     setCitePath(cmc.otherCiteIdInput.value)
+    setPdfPath(cmc.otherCiteIdInput.value)
   else :
     setCitePath(sel.value)
+    setPdfPath(sel.value)
   cmc.selectedCiteIdChanged = True
 
 def setOtherCiteIdChanged() :
   if cmc.otherCiteIdInput.value :
     setCitePath(cmc.otherCiteIdInput.value)
+    setPdfPath(cmc.otherCiteIdInput.value)
     cmc.otherCiteIdChanged = True
   else : # has been cleared!
     cmc.otherCiteIdChanged = False
 
 def setPdfTypeChanged() :
+  if cmc.citeIdSelector.value == "other" :
+    if cmc.otherCiteIdInput.value :
+      setPdfPath(cmc.otherCiteIdInput.value)
+  else : 
+    setPdfPath(cmc.citeIdSelector.value)
+
   cmc.pdfTypeChanged = True
 
 def setupSaveRef() :
@@ -452,6 +474,9 @@ def setupSaveRef() :
     label='PDF type',
     on_change=lambda : setPdfTypeChanged()
   ).props('outlined')
+  cmc.pdfPath = ui.input(
+    label="PDF path:",
+    ).props("readonly outlined").classes('w-full')
   with ui.row() :
     ui.button(
       'Recheck for duplicates',
