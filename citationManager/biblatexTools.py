@@ -54,7 +54,19 @@ def author2urlBase(authorName) :
   #print(f"author/{authorFileName[0:2]}/{authorFileName}")
   return f"author/{authorFileName[0:2]}/{authorFileName}"
 
+def expandSurname(surname) :
+  surnameParts = surname.split()
+  vonPart = ""
+  jrPart  = ""
+  if surnameParts and 1 < len(surnameParts) :
+    if 0 < len(surnameParts) : vonPart = surnameParts.pop(0)
+    if 0 < len(surnameParts) : surname = surnameParts.pop(0)
+    if 0 < len(surnameParts) : jrPart  = surnameParts.pop(0)
+  return (surname, vonPart, jrPart)
+
 def getPossiblePeopleFromSurname(surname) : 
+  surname, vonPart, jrPart = expandSurname(surname)
+  print(f"Searching for author: [{surname}] ({vonPart}) ({jrPart})")
   authorDir = Path('author')
   possibleAuthors = []
   for anAuthor in authorDir.glob(f'*/*{surname}*') :
@@ -92,13 +104,7 @@ def normalizeAuthor(anAuthorRole) :
   nameParts = anAuthor.split(',')
   if nameParts :
     surname = nameParts[0].strip()
-    surnameParts = surname.split()
-    vonPart = ""
-    jrPart  = ""
-    if surnameParts and 1 < len(surnameParts) :
-      if 0 < len(surnameParts) : vonPart = surnameParts.pop(0)
-      if 0 < len(surnameParts) : surname = surnameParts.pop(0)
-      if 0 < len(surnameParts) : jrPart  = surnameParts.pop(0)
+    surname, vonPart, jrPart = expandSurname(surname)
     firstname = ""
     if 1 < len(nameParts) :
       firstname = nameParts[1].replace('.', ' ').strip()
@@ -167,7 +173,7 @@ def citation2urlBase(citeKey) :
 
 def getPossibleCitations(citeKey) :
   possibleCitations = set()
-  possibleCitations.add(citeKey)
+  #possibleCitations.add(citeKey)
   for aCitation in Path("cite").glob(f"*/*{citeKey[0:5]}*") :
     aCitation = str(aCitation.name).removesuffix('.md')
     possibleCitations.add(aCitation)
@@ -205,9 +211,11 @@ def normalizeBiblatex(risEntry) :
   for aPersonRole in peopleRoles :
     aPerson, aRole = getPersonRole(aPersonRole)
     if aRole != 'author' : continue
+    print(f"CiteID author: {aPerson}")
     surname = aPerson.split(',')
     if surname :
       citeId = citeId+surname[0]
+  citeId = citeId.replace(' ', '')
   if 'year' in risEntry :
     citeId = citeId+str(risEntry['year'])
   if 'shorttitle' in risEntry :
@@ -216,6 +224,12 @@ def normalizeBiblatex(risEntry) :
     citeId = citeId+lastPart
   citeId = lowerCaseFirstCharacter(citeId)
 
+  if 'url' in biblatexEntry :
+    if not isinstance(biblatexEntry['url'], list) :
+      biblatexEntry['url'] = [ biblatexEntry['url'] ]
+  else :
+    biblatexEntry['url'] = []
+  
   return (peopleRoles, biblatexEntry, citeId)
 
 def citationPathExists(aCiteId) :
@@ -236,7 +250,7 @@ def savedCitation(aCiteId, aCitationDict, somePeople, theNotes, pdfType) :
     if yearDate :
       if -1 < yearDate.find('-') :
         if 'date' not in aCitationDict :
-          aCitationDict['date'] = yearDate
+          aCitationDict['date'] = yearDate.strip('/')
         if 'year' not in aCitationDict :
           aCitationDict['year'] = yearDate.split('-')
       else :
@@ -258,7 +272,10 @@ biblatex:
 """)
     citeFile.write(f"  title: \"{aCitationDict['title']}\"\n")
     del aCitationDict['title']
+    citeFile.write(f"  entrytype: {aCitationDict['entrytype']}\n")
+    del aCitationDict['entrytype']
     citeFile.write(f"  citekey: {aCiteId}\n")
+    del aCitationDict['citekey']
     citeFile.write(f"  citePath: {citation2urlBase(aCiteId)}.md\n")
     citeFile.write(f"  docType: {pdfType}\n")
     citeFile.write(f"  docPath: {pdfType}/{citation2refUrl(aCiteId)}.pdf\n")

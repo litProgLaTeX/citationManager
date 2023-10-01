@@ -9,7 +9,7 @@ import sys
 import yaml
 
 from citationManager.risTools import \
-  parseRis, getRisTypes, getBibLatexType
+  parseRis, getRisTypes, getBibLatexType, sortRis
 from citationManager.biblatexTools import \
   normalizeBiblatex, \
   getPossibleCitations, \
@@ -100,6 +100,8 @@ class CmCapture :
 cmc = CmCapture()
 
 def clearReference() :
+  print("=====================================================")
+  print("Cleared Reference")
   cmc.confirmPeopleScroll.clear()
   cmc.peopleSelectors = {}
   cmc.selectedPeople  = {}
@@ -211,16 +213,6 @@ def updateReference() :
 ##########################################################################
 # setup progression through tabs
 
-def sortRIS() :
-  aRisString = cmc.risEntryTextArea.value
-  risLines = aRisString.splitlines()
-  deDupedRisLines = set()
-  for aLine in risLines :
-    if aLine.startswith('ER  -') : continue
-    if aLine.strip() == ''       : continue
-    deDupedRisLines.add(aLine)
-  cmc.risEntryTextArea.value = "\n".join(sorted(list(deDupedRisLines)))
-
 def progressToConfirmPeople() :
   biblatexType = getBibLatexType(cmc.risEntryTextArea.value)
   if not biblatexType :
@@ -228,6 +220,11 @@ def progressToConfirmPeople() :
   else :
     updateReference()
     tabs.set_value('confirmPeople')
+
+def sortRisEntry() :
+  cmc.risEntryTextArea.value = sortRis(
+    cmc.risEntryTextArea.value
+  )
 
 def setupRisEntry() :
   cmc.risEntryTextArea = ui.textarea(
@@ -238,7 +235,7 @@ def setupRisEntry() :
   with ui.row() :
     ui.button(
       'Sort RIS',
-      on_click=lambda: sortRIS()
+      on_click=lambda: sortRisEntry()
     )
     ui.button(
       'Confirm People',
@@ -532,5 +529,5 @@ with ui.tab_panels(tabs, value='risEntry').classes('w-full'):
 
 ui.run(
   title='Citation Manager Capture reference',
-  reload=True
+  #reload=True
 )

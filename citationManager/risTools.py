@@ -37,6 +37,35 @@ def getBibLatexType(aRisString) :
 
   return biblatexType
 
+risMapping = {
+  'A1' : 'AU',
+  'T1' : 'TI',
+  'N2' : 'AB',
+  'L1' : 'UR',
+  'L2' : 'UR'
+}
+
+def sortRis(aRisString) :
+  for aKey, aValue in risMapping.items() :
+    aRisString = aRisString.replace(aKey+'  -', aValue+'  -')
+  authorOrder = []
+  authorSet   = set()
+  risLines = aRisString.splitlines()
+  deDupedRisLines = set()
+  for aLine in risLines :
+    if aLine.startswith('ER  -') : continue
+    if aLine.startswith('AU  -') : 
+      if aLine in authorSet : continue
+      authorOrder.append(aLine)
+      authorSet.add(aLine)
+      continue
+    if aLine.strip() == ''       : continue
+    deDupedRisLines.add(aLine)
+  return \
+    "\n".join(authorOrder) \
+    + '\n' \
+    + "\n".join(sorted(list(deDupedRisLines)))
+
 risTagRegExp = re.compile(r'^\S+')
 def parseRis(aRisString, biblatexType) :
   risFields = yaml.safe_load(getRisFields())
