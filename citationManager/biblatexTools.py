@@ -232,7 +232,9 @@ def normalizeBiblatex(risEntry) :
   
   return (peopleRoles, biblatexEntry, citeId)
 
-def citationPathExists(aCiteId) :
+def citationPathExists(aCiteId, refsDir=None) :
+  if refsDir :
+    return (Path(refsDir) / (citation2urlBase(aCiteId) + '.md')).expanduser().exists()
   return Path(citation2urlBase(aCiteId) + '.md').exists()
 
 def savedCitation(aCiteId, aCitationDict, somePeople, theNotes, pdfType) :
@@ -320,3 +322,22 @@ biblatex:
 
   return True
   
+def loadCitation(aCiteId, refsDir=None) :
+  headerDict   = {}
+  bodyMarkdown = ""
+
+  #print(f"loading: {aCiteId}")
+  citePath = Path(citation2urlBase(aCiteId) + '.md')
+  if refsDir :
+    citePath = Path(refsDir) / citePath
+  citePath = citePath.expanduser()
+  if not citePath.exists() :
+    return (headerDict, bodyMarkdown)
+  
+  with open(citePath) as citeFile :
+    preHeader, headerYaml, bodyMarkdown = \
+      citeFile.read().split('---\n')
+    if not headerYaml : return (headerDict, bodyMarkdown)
+    headerDict = yaml.safe_load(headerYaml)
+
+  return (headerDict, bodyMarkdown)
