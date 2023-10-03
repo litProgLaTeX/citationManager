@@ -3,7 +3,21 @@ import json
 import os
 from pathlib import Path
 import sys
+import traceback
 import yaml
+
+import pybtex.style.labels.alpha
+######################################################################
+# Alas we do the monkey-patch (yet again)
+#
+# We wrap the pybtex.style.labels.alpha.LabelStyle::format_label to report
+# which entry(citekey) is being formatted...
+old_format_label = pybtex.style.labels.alpha.LabelStyle.format_label
+def monkeyPatchedFormatLabel(self, entry) :
+  if 'citekey' in entry.fields :
+    print(f"Formatting entry: {entry.fields['citekey']}")
+  return old_format_label(self, entry)
+pybtex.style.labels.alpha.LabelStyle.format_label = monkeyPatchedFormatLabel
 
 from pybtex.database import \
   BibliographyData, Entry, Person
@@ -116,6 +130,7 @@ def cli() :
         aField = fieldMapping[aField]
       biblatex[aField] = aValue
     knownCitations[aCiteId] = biblatex
+    newCitations.add(aCiteId)
     if aCiteId in missingCitations :
       missingCitations.remove(aCiteId)
 
@@ -175,7 +190,18 @@ def cli() :
     formattedBibliography = \
       style.format_bibliography(bibData, theCiteIds)
   except Exception as err :
+    print("While trying to format the Bibliography...")
     print(f"ERROR: {repr(err)}")
+    print("------------------------------------------")
+    print(yaml.dump(theCiteIds))
+    print("------------------------------------------")
+    print(traceback.format_exc())
+    with open(config['bblFile'],'w') as bblFile :
+      bblFile.write("""
+
+  % something went wrong trying to format the bibliography
+  \\par\\noindent\\fbox{cmScan failed to create the bibliography}
+  """)
     return
 
   # get the 'latex' pybtex backend...
