@@ -258,6 +258,8 @@ def savedCitation(aCiteId, aCitationDict, somePeople, theNotes, pdfType) :
       else :
         if 'year' not in aCitationDict :
           aCitationDict['year'] = yearDate
+    if 'year' in aCitationDict :
+      aCitationDict['year'] = str(aCitationDict['year'])
 
   # make sure the citation path exists
   #
