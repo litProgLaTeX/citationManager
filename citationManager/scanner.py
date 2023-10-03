@@ -49,14 +49,13 @@ def loadConfig(verbose=False) :
   if 'buildDir' not in config :
     config['buildDir'] = os.path.join('build', 'latex')
 
-  config['bblFile'] = os.path.join(
+  baseFileName = os.path.join(
     config['buildDir'],
-    sys.argv[1].replace(r'\..+$','')+'.bbl'
+    sys.argv[1].replace(r'\..+$','')
   )
-  config['citeFile'] = os.path.join(
-    config['buildDir'],
-    sys.argv[1].replace(r'\..+$','')+'.cit'
-  )
+  config['auxFile']  = baseFileName+'.aux'
+  config['bblFile']  = baseFileName+'.bbl'
+  config['citeFile'] = baseFileName+'.cit'
 
   if verbose :
     print("-------------------------------------------------")
@@ -86,15 +85,15 @@ def cli() :
   
   print("")
   newCitations = set()
-  for anAuxFilePath in Path(config['buildDir']).glob('**/*.aux') :
-    print(f"scanning: {anAuxFilePath}")
-    with open(anAuxFilePath) as auxFile :
-      for aLine in auxFile.readlines() :
-        if aLine.find('\\citation') < 0 : continue
-        aCiteId = aLine.replace('\\citation{','').strip().strip('}')
-        if aCiteId in knownCitations : continue
-        if aCiteId in missingCitations : continue
-        newCitations.add(aCiteId)
+  anAuxFilePath = config['auxFile']
+  print(f"scanning: {anAuxFilePath}")
+  with open(anAuxFilePath) as auxFile :
+    for aLine in auxFile.readlines() :
+      if aLine.find('\\citation') < 0 : continue
+      aCiteId = aLine.replace('\\citation{','').strip().strip('}')
+      if aCiteId in knownCitations : continue
+      if aCiteId in missingCitations : continue
+      newCitations.add(aCiteId)
 
   citations2load = set()
   citations2load = citations2load.union(missingCitations, newCitations)
