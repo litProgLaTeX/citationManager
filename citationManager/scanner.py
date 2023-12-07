@@ -19,6 +19,7 @@ def monkeyPatchedFormatLabel(self, entry) :
   return old_format_label(self, entry)
 pybtex.style.labels.alpha.LabelStyle.format_label = monkeyPatchedFormatLabel
 
+from pybtex.style.template import FieldIsMissing
 from pybtex.database import \
   BibliographyData, Entry, Person
 from pybtex.plugin import find_plugin
@@ -80,7 +81,7 @@ def loadConfig(verbose=False) :
 
 def cli() :
   config = loadConfig()
-  
+
   knownCitations = {}
   missingCitations = set()
   try :
@@ -96,7 +97,7 @@ def cli() :
     print(f"ERROR: Oops something went wrong...")
     print(repr(err))
     print(f"(re)Initializing {config['citeFile']} for the first time")
-  
+
   print("")
   newCitations = set()
   anAuxFilePath = config['auxFile']
@@ -161,17 +162,17 @@ def cli() :
         for aPerson in biblatex[aPersonType] :
           theEntry.add_person(Person(aPerson), aPersonType)
     bibData.add_entry(aCiteId, theEntry)
-  
+
   print("")
 
   ####################################################################
   # USING pybtex to write a bbl file...
   #
-  # see pybtex documentation: 
+  # see pybtex documentation:
   # https://docs.pybtex.org/api/styles.html#pybtex.style.formatting.BaseStyle
   # and the code in:
   #   pybtex.__init__.py class PybtexEngine::format_from_files
-  # 
+  #
 
   # get the style class...
   styleCls = find_plugin('pybtex.style.formatting', 'alpha')
@@ -189,11 +190,32 @@ def cli() :
   try :
     formattedBibliography = \
       style.format_bibliography(bibData, theCiteIds)
+  except FieldIsMissing as err :
+    citeKey = err.args[0].split().pop()
+    print("------------------------------------------")
+    print( "While trying to format the citation")
+    print(f"    {citeKey}")
+    print(f"  the '{err.field_name}' field was missing.")
+    print( "  Check the")
+    print(f"    get_{bibData.entries._dict[citeKey.lower()].type}_template")
+    print( "  method in the")
+    print( "    .venv/lib/python3.11/site-packages/pybtex/style/formatting/unsrt.py")
+    print( "  file for more details of which fields are expected.")
+    print("------------------------------------------")
+    with open(config['bblFile'],'w') as bblFile :
+      bblFile.write("""
+
+  % something went wrong trying to format the bibliography
+  \\par\\noindent\\fbox{cmScan failed to create the bibliography}
+  """)
+    return
   except Exception as err :
     print("While trying to format the Bibliography...")
     print(f"ERROR: {repr(err)}")
     print("------------------------------------------")
     print(yaml.dump(theCiteIds))
+    print("------------------------------------------")
+    print(yaml.dump(bibData))
     print("------------------------------------------")
     print(traceback.format_exc())
     with open(config['bblFile'],'w') as bblFile :
