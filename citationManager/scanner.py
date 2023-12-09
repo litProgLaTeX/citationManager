@@ -36,14 +36,31 @@ def usage() :
     projBase   The base LaTeX file for which to create Bibliographic entries
 
   options:
-    -h, --help This help text
+    -r --recheck Recheck all references (ignore known citations file)
+    -v --verbose Be verbose
+    -h, --help   This help text
 """)
   sys.exit(1)
 
 typeOfPeople = ['author', 'editor']
 
 def loadConfig(verbose=False) :
-  if len(sys.argv) != 2 : usage()
+  cmdLineArgs = sys.argv.copy()
+  cmdLineArgs.pop(0) # remove the program's path
+  projBase = None
+  recheck  = False
+  for anArg in cmdLineArgs :
+    if anArg == '-r' or anArg == '--recheck' :
+      recheck = True
+      continue
+    if anArg == '-v' or anArg == '--verbose' :
+      verbose = True
+      continue
+    if anArg == '-h' or anArg == '--help' :
+      usage()
+    projBase = anArg
+
+  if not projBase : usage()
 
   config = {}
   with open(
@@ -54,6 +71,9 @@ def loadConfig(verbose=False) :
   if 'refsDir' not in config :
     print("ERROR: no references directory has been configured!")
     sys.exit(2)
+
+  config['recheck'] = recheck
+  config['verbose'] = verbose
 
   if 'entryTypeMapping' not in config :
     config['entryTypeMapping'] = {}
@@ -66,7 +86,7 @@ def loadConfig(verbose=False) :
 
   baseFileName = os.path.join(
     config['buildDir'],
-    sys.argv[1].replace(r'\..+$','')
+    projBase.replace(r'\..+$','')
   )
   config['auxFile']  = baseFileName+'.aux'
   config['bblFile']  = baseFileName+'.bbl'
@@ -79,36 +99,58 @@ def loadConfig(verbose=False) :
 
   return config
 
+def writeBrokenBBLFile() :
+  try:
+    with open(config['bblFile'],'w') as bblFile :
+      bblFile.write("""
+
+  % something went wrong trying to format the bibliography
+  \\par\\noindent\\fbox{cmScan failed to create the bibliography}
+  """)
+  except Exception as err :
+    print("Could not write document's bbl file.")
+    sys.exit(2)
+
 def cli() :
   config = loadConfig()
 
   knownCitations = {}
   missingCitations = set()
-  try :
-    with open(config['citeFile']) as citeFile :
-      citationData = json.loads(citeFile.read())
-      if 'knownCitations' in citationData :
-        knownCitations = citationData['knownCitations']
-      if 'missingCitations' in citationData :
-        missingCitations = set(citationData['missingCitations'])
-  except FileNotFoundError as err :
-    print(f"Initializing {config['citeFile']} for the first time")
-  except Exception as err :
-    print(f"ERROR: Oops something went wrong...")
-    print(repr(err))
-    print(f"(re)Initializing {config['citeFile']} for the first time")
+  if config['recheck'] :
+    print(f"Rechecking all citations (ignoring the {config['citeFile']} file)")
+  else :
+    try :
+      with open(config['citeFile']) as citeFile :
+        citationData = json.loads(citeFile.read())
+        if 'knownCitations' in citationData :
+          knownCitations = citationData['knownCitations']
+        if 'missingCitations' in citationData :
+          missingCitations = set(citationData['missingCitations'])
+    except FileNotFoundError as err :
+      print(f"Initializing {config['citeFile']} for the first time")
+    except Exception as err :
+      print(f"ERROR: Oops something went wrong...")
+      print(repr(err))
+      print(f"(re)Initializing {config['citeFile']} for the first time")
 
   print("")
   newCitations = set()
   anAuxFilePath = config['auxFile']
   print(f"scanning: {anAuxFilePath}")
-  with open(anAuxFilePath) as auxFile :
-    for aLine in auxFile.readlines() :
-      if aLine.find('\\citation') < 0 : continue
-      aCiteId = aLine.replace('\\citation{','').strip().strip('}')
-      if aCiteId in knownCitations : continue
-      if aCiteId in missingCitations : continue
-      newCitations.add(aCiteId)
+  try:
+    with open(anAuxFilePath) as auxFile :
+      for aLine in auxFile.readlines() :
+        if aLine.find('\\citation') < 0 : continue
+        aCiteId = aLine.replace('\\citation{','').strip().strip('}')
+        if aCiteId in knownCitations : continue
+        if aCiteId in missingCitations : continue
+        newCitations.add(aCiteId)
+  except Exception as err :
+    print(f"Could not open the document's aux file")
+    print(f"  {anAuxFilePath}")
+    print( "There is nothing more we can do...")
+    writeBrokenBBLFile()
+    return
 
   citations2load = set()
   citations2load = citations2load.union(missingCitations, newCitations)
@@ -134,13 +176,6 @@ def cli() :
     newCitations.add(aCiteId)
     if aCiteId in missingCitations :
       missingCitations.remove(aCiteId)
-
-  # write out the citation data for the next run...
-  with open(config['citeFile'], 'w') as citeFile :
-    citeFile.write(json.dumps({
-      'knownCitations'   : knownCitations,
-      'missingCitations' : sorted(list(missingCitations))
-    }))
 
   print("")
   if not newCitations :
@@ -202,12 +237,7 @@ def cli() :
     print( "    .venv/lib/python3.11/site-packages/pybtex/style/formatting/unsrt.py")
     print( "  file for more details of which fields are expected.")
     print("------------------------------------------")
-    with open(config['bblFile'],'w') as bblFile :
-      bblFile.write("""
-
-  % something went wrong trying to format the bibliography
-  \\par\\noindent\\fbox{cmScan failed to create the bibliography}
-  """)
+    writeBrokenBBLFile()
     return
   except Exception as err :
     print("While trying to format the Bibliography...")
@@ -218,19 +248,23 @@ def cli() :
     print(yaml.dump(bibData))
     print("------------------------------------------")
     print(traceback.format_exc())
-    with open(config['bblFile'],'w') as bblFile :
-      bblFile.write("""
-
-  % something went wrong trying to format the bibliography
-  \\par\\noindent\\fbox{cmScan failed to create the bibliography}
-  """)
+    writeBrokenBBLFile()
     return
 
   # get the 'latex' pybtex backend...
   outputBackend = find_plugin('pybtex.backends', 'latex')
 
   # write out the bbl file...
+  print("\nWriting out the BBL file")
   outputBackend('UTF-8').write_to_file(
     formattedBibliography,
     config['bblFile']
   )
+
+  # write out the citation data for the next run...
+  print("Writing out the CIT file")
+  with open(config['citeFile'], 'w') as citeFile :
+    citeFile.write(json.dumps({
+      'knownCitations'   : knownCitations,
+      'missingCitations' : sorted(list(missingCitations))
+    }))
