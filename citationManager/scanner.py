@@ -178,7 +178,7 @@ def cli() :
       missingCitations.remove(aCiteId)
 
   print("")
-  if not newCitations :
+  if not newCitations or (len(knownCitations) < 1) :
     print("no new citations... nothing more to do!")
     return
   else :
