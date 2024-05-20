@@ -10,7 +10,8 @@ import yaml
 
 from citationManager.risTools import \
   parseRis, getRisTypes, getBibLatexType, sortRis
-from citationManager.biblatexTools import \
+
+from cmTools.biblatexTools import \
   normalizeBiblatex, \
   getPossibleCitations, \
   citationPathExists, savedCitation, \
@@ -71,7 +72,7 @@ def setPdfPath(aCiteId) :
     cmc.pdfPath.value = thePdfPath
 
 ##########################################################################
-# update interface 
+# update interface
 
 class CmCapture :
   confirmPeopleScroll   = None
@@ -160,7 +161,7 @@ def updateReference() :
         if surname :
           posPeople = getPossiblePeopleFromSurname(surname[0]) #, config)
 
-        if aPersonRole in cmc.peopleSelectors : 
+        if aPersonRole in cmc.peopleSelectors :
           if aPersonRole not in cmc.selectedPeople :
             cmc.selectedPeople[aPersonRole] = posPeople[0]
           cmc.peopleSelectors[aPersonRole].set_options(
@@ -176,7 +177,7 @@ def updateReference() :
               lambda sel, aPersonRole=aPersonRole : \
                 setPeopleSelector(aPersonRole, sel)
           ).props("outlined")
-  
+
   cmc.peopleToAddList = []
   if peopleRoles :
     for aPersonRole, aSelector in cmc.peopleSelectors.items() :
@@ -252,7 +253,7 @@ def progressToCheckPeople() :
   updateReference()
   if 0 < len(cmc.peopleToAddList) :
     tabs.set_value('addPeople')
-  else :  
+  else :
     cmc.peopleToAddList = None
     tabs.set_value('biblatexEntry')
 
@@ -285,16 +286,16 @@ async def savePerson() :
     ui.notify(f"Could not parse the author's YAML\n{repr(err)}")
     tabs.set_value('confirmPeople')
     return
-  
+
   if authorPathExists(aPersonDict) :
     if not await overwriteDialog(
       f"The author {aPersonDict['cleanname']} already exists, do you want to overwrite this author?"
-    ) : 
+    ) :
       tabs.set_value('confirmPeople')
       return
     ui.notify(f'Overwriting author')
 
-  if savedAuthorToFile(aPersonDict, cmc.peopleNotesTextArea.value) : 
+  if savedAuthorToFile(aPersonDict, cmc.peopleNotesTextArea.value) :
     ui.notify("Author saved")
     updateReference()
   tabs.set_value('confirmPeople')
@@ -394,13 +395,13 @@ async def saveReference() :
   if citationPathExists(theCiteId) :
     if not await overwriteDialog(
       f'The citation [{theCiteId}] already exists,\n  do you really want to overwrite this citation?'
-    ) : 
+    ) :
       #tabs.set_value('confirmPeople')
       return
     ui.notify(f'Overwriting citation')
 
   theCitation = {}
-  try : 
+  try :
     theCitation = yaml.safe_load(
       cmc.biblatexEntryTextArea.value
     )
@@ -439,7 +440,7 @@ def setPdfTypeChanged() :
   if cmc.citeIdSelector.value == "other" :
     if cmc.otherCiteIdInput.value :
       setPdfPath(cmc.otherCiteIdInput.value)
-  else : 
+  else :
     setPdfPath(cmc.citeIdSelector.value)
 
   cmc.pdfTypeChanged = True
@@ -496,7 +497,7 @@ def setupSaveRef() :
     )
 
 ##########################################################################
-# block out the main interface 
+# block out the main interface
 
 with ui.header().classes(replace='row items-center') as header:
   with ui.tabs() as tabs:
