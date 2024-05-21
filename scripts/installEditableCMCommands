@@ -43,7 +43,6 @@ CMD_SCRIPT
 
 runScript cmCapture
 installScript cmCapture
-installScript cmScan
 
 
 echo ""
