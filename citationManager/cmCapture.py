@@ -16,7 +16,7 @@ from cmTools.biblatexTools import \
   getPossibleCitations, \
   citationPathExists, savedCitation, \
   citation2urlBase, citation2refUrl, \
-  normalizeAuthor, \
+  normalizeAuthor, guessSurname, \
   makePersonRole, getPersonRole, \
   getPossiblePeopleFromSurname, \
   authorPathExists, savedAuthorToFile
@@ -139,6 +139,7 @@ def setPeopleSelector(aPersonRole, sel) :
   cmc.selectedPeople[aPersonRole] = sel.value
 
 def setPersonToAdd(aPersonRole) :
+  if not aPersonRole : return
   aPersonName, _ = getPersonRole(aPersonRole)
   cmc.peopleToAddTextArea.value = yaml.dump(
     normalizeAuthor(aPersonName),
@@ -157,9 +158,10 @@ def updateReference() :
       for aPersonRole in peopleRoles :
         aName, aRole = getPersonRole(aPersonRole)
         posPeople = ['new']
-        surname = aName.split(',')
+
+        surname = guessSurname(aName)
         if surname :
-          posPeople = getPossiblePeopleFromSurname(surname[0]) #, config)
+          posPeople = getPossiblePeopleFromSurname(surname) #, config)
 
         if aPersonRole in cmc.peopleSelectors :
           if aPersonRole not in cmc.selectedPeople :
@@ -259,9 +261,9 @@ def progressToCheckPeople() :
 
 def setupConfirmPeople() :
   cmc.peopleSelectors = {}
-  with ui.row():
+  with ui.row().classes('w-full'):
     with ui.card().classes('w-full').props('rows=25') :
-      cmc.confirmPeopleScroll = ui.scroll_area()
+      cmc.confirmPeopleScroll = ui.scroll_area().classes('w-full')
   with ui.row() :
     ui.button(
       'Review required fields',
